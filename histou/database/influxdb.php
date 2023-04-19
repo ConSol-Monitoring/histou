@@ -55,7 +55,7 @@ class Influxdb extends JSONDatabase
         } elseif (empty($result['results'][0])) {
             return $result['results'][1];
         } else {
-            if(empty($results["results"][0]["series"])) {
+            if(empty($result["results"][0]["series"])) {
                 return null;
             }            
             if(count($result['results'][0]["series"]) > $seriesLimit) {
