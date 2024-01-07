@@ -1,0 +1,18 @@
+name: citest
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '30 4 * * 1'
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+    - uses: abbbi/github-actions-tune@v1
+    - run: sudo apt-get -y install phpunit
+    - uses: actions/checkout@v4
+    - run: tar xzf conf/vendor.tar.gz
+    - run: php --version
+    - run: phpunit -c conf/phpunit.xml

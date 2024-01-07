@@ -4,9 +4,8 @@ namespace tests\template;
 
 class ParserTest extends \MyPHPUnitFrameworkTestCase
 {
-    protected function setUp()
+    public function setUp(): void
     {
-        spl_autoload_register('__autoload');
         define('DEFAULT_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'default')));
         define('HEIGHT', '200px');
         define('INFLUX_FIELDSEPERATOR', '&');
@@ -101,7 +100,7 @@ perfLabel = load1, load5, load15
 
 
     }
-    
+
     public function testParseSimpleFileElastic()
     {
         define('DATABASE_TYPE', 'elasticsearch');

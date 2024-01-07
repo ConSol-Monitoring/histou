@@ -4,9 +4,8 @@ namespace tests\template;
 
 class FolderTest extends \MyPHPUnitFrameworkTestCase
 {
-    protected function setUp()
+    public function setUp(): void
     {
-        spl_autoload_register('__autoload');
         define('TMP_FOLDER', sys_get_temp_dir());
         define('PHP_COMMAND', 'php');
         define('DEFAULT_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(TMP_FOLDER, 'histou_test', 'default')));

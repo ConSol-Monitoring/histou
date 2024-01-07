@@ -4,9 +4,8 @@ namespace tests\template;
 
 class TemplateTest extends \MyPHPUnitFrameworkTestCase
 {
-    protected function setUp()
+    public function setUp(): void
     {
-        spl_autoload_register('__autoload');
         \histou\Basic::parsIni('histou.ini.example');
     }
 
