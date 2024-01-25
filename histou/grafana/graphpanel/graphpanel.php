@@ -257,6 +257,9 @@ abstract class GraphPanel extends \histou\grafana\Panel
                 return 'Bps'; # bytes/sec(SI)
             case 'binBps':
                 return 'binBps'; # bytes/sec(IEC)
+            case 'bps':
+            case 'binbps':
+                return $unit;
             case '%':
             case 'percent':
             case 'pct':
