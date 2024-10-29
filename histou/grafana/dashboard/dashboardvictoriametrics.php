@@ -57,6 +57,6 @@ class DashboardVictoriametrics extends Dashboard
     **/
     public function genTemplateVariable($variable)
     {
-        return "\$$variable";
+        return "\${". $variable .":raw}";
     }
 }
