@@ -48,7 +48,7 @@ class DashboardVictoriametrics extends Dashboard
 
     public function addTemplateForPerformanceLabel($name, $host, $service, $regex = '', $multiFormat = false, $includeAll = false)
     {
-        $query = sprintf('{"find": "terms", "field": "performanceLabel", "query": "host: %s, service: %s"}', $host, $service);
+        $query = sprintf('label_values(metrics_value{host="%s", service="%s"},performanceLabel)', $host, $service);
         $this->addTemplate(VICTORIAMETRICS_DS, $name, $query, $regex, $multiFormat, $includeAll);
     }
 
