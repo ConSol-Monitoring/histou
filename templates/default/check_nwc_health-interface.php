@@ -25,7 +25,7 @@ $genTemplate = function ($perfData) {
         $templateName,
         $perfData['host'],
         $perfData['service'],
-        $regex = '^(.*?)_([a-zA-Z]+?)_[a-zA-Z]+$',
+        $regex = '^(.*?)(_broadcast|)_([a-zA-Z]+?)_[a-zA-Z]+$', //ignore broadcast_usage_in and _out for now
         $multiFormat = true,
         $includeAll = false
     );
