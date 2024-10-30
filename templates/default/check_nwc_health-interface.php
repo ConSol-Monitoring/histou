@@ -55,7 +55,7 @@ $genTemplate = function ($perfData) {
                     return 4;
             }
         };
-        return ($index($firstLabel) - $index($secondLabel)) ? -1 : 1;
+        return ($index($firstLabel) < $index($secondLabel)) ? -1 : 1;
     });
     $row = new \histou\grafana\Row($perfData['service'].' '.$perfData['command']);
     $numberPanels = 0;
