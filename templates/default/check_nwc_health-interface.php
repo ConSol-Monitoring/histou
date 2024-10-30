@@ -19,7 +19,6 @@ $rule = new \histou\template\Rule(
 $genTemplate = function ($perfData) {
     $dashboard = \histou\grafana\dashboard\DashboardFactory::generateDashboard($perfData['host'].'-'.$perfData['service']);
     $dashboard->addDefaultAnnotations($perfData['host'], $perfData['service']);
-    $templeQuery = 'SHOW TAG VALUES WITH KEY = "performanceLabel" WHERE "host" = \''.$perfData['host'].'\' AND "service" = \''.$perfData['service'].'\'';
     $templateName = 'Interface';
     $dashboard->addTemplateForPerformanceLabel(
         $templateName,
