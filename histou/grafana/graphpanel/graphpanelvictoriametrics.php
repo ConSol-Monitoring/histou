@@ -81,32 +81,11 @@ class GraphPanelVictoriametrics extends GraphPanel
                     'measurement' => 'metrics',
                     'legendFormat' => '{{performanceLabel}}-{{__tmp_alias}}',
                     'select' => array(),
-                    'tags' => $this->createFilterTags($filterTags),
+                    'tags' => $filterTags,
                     'dsType' => 'prometheus',
                     'resultFormat' => 'time_series',
                     'datasource' => $datasource,
                     ));
-    }
-
-    /**
-    Creates filter tags array based on host, service...
-    **/
-    private function createFilterTags(array $filterTags = array())
-    {
-        return $filterTags;
-        $tags = array();
-        $i = 0;
-        foreach ($filterTags as $key => $value) {
-            $condition = (array_key_exists('condition', $value) ? $value['condition'] : 'AND');
-            $operator = (array_key_exists('operator', $value) ? $value['operator'] : '=');
-            if ($i == 0) {
-                array_push($tags, array('key'=> $key, 'operator' => $operator, 'value' => $value['value'] ));
-            } else {
-                array_push($tags, array('condition' => $condition, 'key'=> $key, 'operator' => $operator, 'value' => $value['value']));
-            }
-            $i++;
-        }
-        return $tags;
     }
 
     /**
@@ -161,9 +140,6 @@ class GraphPanelVictoriametrics extends GraphPanel
 
     public function addXToTarget($target, array $types, $alias, $color, $keepAlias = false, $createSelect = null, $lineWidth = 1)
     {
-        //if ($createSelect == null) {
-            //$createSelect = "\histou\grafana\graphpanel\GraphPanelInfluxdb::createSelect";
-        //}
         foreach ($types as $type) {
             if ($keepAlias) {
                 $newalias = $alias;
@@ -171,7 +147,6 @@ class GraphPanelVictoriametrics extends GraphPanel
                 $newalias = $alias.'-'.$type;
             }
             array_push($target['select'], array($type, $newalias));
-            //array_push($target['select'], "[$type x $newalias]");
             if ($color != '') {
                 $this->addAliasColor($newalias, $color, $lineWidth);
             }
