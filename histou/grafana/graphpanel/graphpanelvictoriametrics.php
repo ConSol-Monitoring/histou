@@ -46,7 +46,8 @@ class Target extends \ArrayObject implements \JsonSerializable {
     private function getFilter() {
         $filter = array();
         foreach($this['tags'] as $key => $val) {
-            array_push($filter, $key . '="' . $val['value'] . '"');
+            $operator = (array_key_exists('operator', $val) ? $val['operator'] : '=');
+            array_push($filter, $key . $operator . '"' . $val['value'] . '"');
         }
         return join(",", $filter);
     }
@@ -126,10 +127,10 @@ class GraphPanelVictoriametrics extends GraphPanel
         }
         if ($useRegex) {
             $target = $this->createTarget(array(
-                                            'host' => array('value' => \histou\helper\str::genRegex($host), 'operator' => '=~'),
-                                            'service' => array('value' => \histou\helper\str::genRegex($service), 'operator' => '=~'),
-                                            'command' => array('value' => \histou\helper\str::genRegex($command), 'operator' => '=~'),
-                                            'performanceLabel' => array('value' => \histou\helper\str::genRegex($performanceLabel), 'operator' => '=~')
+                                            'host' => array('value' => "^".$host."$", 'operator' => '=~'),
+                                            'service' => array('value' => "^".$service."$", 'operator' => '=~'),
+                                            'command' => array('value' => "^".$command."$", 'operator' => '=~'),
+                                            'performanceLabel' => array('value' => "^".$performanceLabel."$", 'operator' => '=~')
                                             ));
         } else {
             $target = $this->createTarget(array(
