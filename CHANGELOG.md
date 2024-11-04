@@ -1,4 +1,8 @@
-## next:
+## v0.5.3 - 04.11.2024
+### Fixes
+- fix regexp operator when using victoriametrics
+
+## v0.5.2 - 25.01.2024
 ### Change
 - remove elasticsearch support
 - convert to time_series panel
