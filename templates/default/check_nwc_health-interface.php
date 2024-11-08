@@ -19,13 +19,12 @@ $rule = new \histou\template\Rule(
 $genTemplate = function ($perfData) {
     $dashboard = \histou\grafana\dashboard\DashboardFactory::generateDashboard($perfData['host'].'-'.$perfData['service']);
     $dashboard->addDefaultAnnotations($perfData['host'], $perfData['service']);
-    $templeQuery = 'SHOW TAG VALUES WITH KEY = "performanceLabel" WHERE "host" = \''.$perfData['host'].'\' AND "service" = \''.$perfData['service'].'\'';
     $templateName = 'Interface';
     $dashboard->addTemplateForPerformanceLabel(
         $templateName,
         $perfData['host'],
         $perfData['service'],
-        $regex = '^(.*?)_([a-zA-Z]+?)_[a-zA-Z]+$',
+        $regex = '^(.*?)(_broadcast|)_([a-zA-Z]+?)_[a-zA-Z]+$', //ignore broadcast_usage_in and _out for now
         $multiFormat = true,
         $includeAll = false
     );
@@ -56,7 +55,7 @@ $genTemplate = function ($perfData) {
                     return 4;
             }
         };
-        return ($index($firstLabel) - $index($secondLabel)) ? -1 : 1;
+        return ($index($firstLabel) < $index($secondLabel)) ? -1 : 1;
     });
     $row = new \histou\grafana\Row($perfData['service'].' '.$perfData['command']);
     $numberPanels = 0;

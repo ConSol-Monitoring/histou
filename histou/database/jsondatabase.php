@@ -69,7 +69,13 @@ abstract class JSONDatabase
     protected function makeGetRequest($query)
     {
         try {
-            $content = file_get_contents($this->url.urlencode($query));
+            $contextOptions = array(
+                'ssl' => array(
+                    'verify_peer'   => false,
+                )
+            );
+            $context = stream_context_create($contextOptions);
+            $content = file_get_contents($this->url.urlencode($query), false, $context);
         } catch (\ErrorException $e) {
             return $e->getMessage();
         }
