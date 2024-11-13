@@ -1,3 +1,9 @@
+## next
+### Fixes
+- fix victoriametrics label lookup
+### Change
+- change template syntax to :raw variables
+
 ## v0.5.3 - 04.11.2024
 ### Fixes
 - fix regexp operator when using victoriametrics
