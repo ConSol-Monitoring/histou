@@ -1,6 +1,7 @@
-## next
+## v0.5.4 - 18.12.2024
 ### Fixes
 - fix victoriametrics label lookup
+- fix check_icmp template when pinging multiple IPs
 ### Change
 - change template syntax to :raw variables
 
