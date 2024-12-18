@@ -13,7 +13,7 @@ $rule = new \histou\template\Rule(
     $host = '*',
     $service = '*',
     $command = '*',
-    $perfLabel = array('rta', 'pl', 'rtmax', 'rtmin')
+    $perfLabel = array('^rta$', '^pl$', '^rtmax$', '^rtmin$') /* does not work with check_icmp using multiple IPs right now */
 );
 
 $genTemplate = function ($perfData) {
