@@ -1,3 +1,7 @@
+##next
+### Change
+- improve loading javascript files
+
 ## v0.5.4 - 18.12.2024
 ### Fixes
 - fix victoriametrics label lookup
