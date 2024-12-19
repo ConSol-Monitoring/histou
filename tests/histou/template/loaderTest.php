@@ -5,9 +5,8 @@ namespace tests\template;
 class LoaderTest extends \MyPHPUnitFrameworkTestCase
 {
 
-    protected function setUp()
+    public function setUp(): void
     {
-        spl_autoload_register('__autoload');
         define('DEFAULT_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'default')));
         define('CUSTOM_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'custom')));
         define('FORECAST_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'forecast')));
@@ -100,7 +99,7 @@ perfLabel = load1, load5, load15
 
         $this->assertInstanceOf('\histou\template\Template', $templates[0]);
         $this->assertSame(null, $templates[1]); //Syntaxcheck failed
-        $this->assertContains('Parse error: syntax error', \histou\Debug::getLogAsMarkdown());
+        $this->assertStringContainsString('Parse error:  syntax error', \histou\Debug::getLogAsMarkdown());
         $this->assertInstanceOf('\histou\template\SimpleTemplate', $templates[2]);
         $this->assertSame(null, $templates[3]); //Wrong filename
 
@@ -259,7 +258,7 @@ EOF;
         $this->assertInstanceOf('\histou\template\ForecastTemplate', $templates[0]);
         $this->assertInstanceOf('\histou\template\ForecastTemplate', $templates[2]);
         $this->assertSame(null, $templates[1]); //Syntaxcheck failed
-        $this->assertContains('Parse error: syntax error', \histou\Debug::getLogAsMarkdown());
+        $this->assertStringContainsString('Parse error:  syntax error', \histou\Debug::getLogAsMarkdown());
 
         $this->assertSame(FORECAST_TEMPLATE_FOLDER, $templates[0]->getPath());
         $this->assertSame('template1.php', $templates[0]->getBaseName());

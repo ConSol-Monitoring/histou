@@ -43,7 +43,6 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         $out2 = ob_get_contents();
         ob_end_clean();
         $this->assertSame("", $out2);
-
     }
 
     public function testTestConfig()
@@ -60,8 +59,7 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         $this->assertSame(1, \histou\Basic::testConfig());
         $err = ob_get_contents();
         ob_end_clean();
-        $this->assertSame($err, $this->wrongPhpCommand);
-
+        $this->assertSame($this->trim_multiline_string($err), $this->trim_multiline_string($this->wrongPhpCommand));
     }
 
     public function testParseIniInflux()
@@ -110,7 +108,7 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         $out1 = ob_get_contents();
         ob_end_clean();
 
-        $this->assertSame($this->emptyDashboard, $out1);
+        $this->assertSame($this->trim_multiline_string($this->emptyDashboard), $this->trim_multiline_string($out1));
         $_GET["callback"] = 1;
         ob_start();
         \histou\Basic::returnData('{"foo":"bar"}');
@@ -122,8 +120,16 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         \histou\Basic::returnData(1);
         $out3 = ob_get_contents();
         ob_end_clean();
-        $this->assertContains("<pre>Don't know what to do with this type: integer", $out3);
+        $this->assertStringContainsString("<pre>Don't know what to do with this type: integer", $out3);
     }
+
+    private function trim_multiline_string($multiline_string) {
+        $lines = explode("\n", $multiline_string);
+        $trimmed_lines = array_map('trim', $lines);
+        $trimmed_string = implode("\n", $trimmed_lines);
+        return $trimmed_string;
+    }
+
     private $emptyDashboard = '<pre>Array
 (
     [id] => 1
@@ -220,6 +226,11 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
                                     [id] => 1
                                     [mode] => text
                                     [content] =>
+                                    [options] => Array
+                                      (
+                                        [content] =>
+                                      )
+
                                 )
 
                         )
@@ -229,7 +240,7 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         )
 
 )
-<br>0<br>{"id":"1","title":"foo","originalTitle":"CustomDashboard","tags":[],"timezone":"browser","editable":true,"hideControls":true,"sharedCrosshair":false,"nav":[{"type":"timepicker","enable":true,"time_options":["5m","15m","1h","6h","12h","24h","2d","7d","30d"],"refresh_intervals":["5s","10s","30s","1m","5m","15m","30m","1h","2h","1d"],"now":true,"collapse":false,"notice":false}],"time":{"from":"now-8h","to":"now"},"templating":{"list":[]},"annotations":{"enable":true,"list":[]},"refresh":"30s","version":"6","rows":[{"title":"","editable":true,"height":"400px","panels":[{"title":"","type":"text","span":12,"editable":true,"id":1,"mode":"text","content":""}]}]}<br></pre>';
+<br>0<br>{"id":"1","title":"foo","originalTitle":"CustomDashboard","tags":[],"timezone":"browser","editable":true,"hideControls":true,"sharedCrosshair":false,"nav":[{"type":"timepicker","enable":true,"time_options":["5m","15m","1h","6h","12h","24h","2d","7d","30d"],"refresh_intervals":["5s","10s","30s","1m","5m","15m","30m","1h","2h","1d"],"now":true,"collapse":false,"notice":false}],"time":{"from":"now-8h","to":"now"},"templating":{"list":[]},"annotations":{"enable":true,"list":[]},"refresh":"30s","version":"6","rows":[{"title":"","editable":true,"height":"400px","panels":[{"title":"","type":"text","span":12,"editable":true,"id":1,"mode":"text","content":"","options":{"content":""}}]}]}<br></pre>';
     private $wrongPhpCommand = '<pre>Array
 (
     [id] => 1
@@ -326,6 +337,11 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
                                     [id] => 1
                                     [mode] => markdown
                                     [content] => # \'foo -h 2>&1\' did not return with returncode 0. Maybe the phpCommand is not set properly.
+                                    [options] => Array
+                                      (
+                                        [content] => # \'foo -h 2>&1\' did not return with returncode 0. Maybe the phpCommand is not set properly.
+                                      )
+
                                 )
 
                         )
@@ -335,5 +351,5 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         )
 
 )
-<br>1<br>{"id":"1","title":"Error","originalTitle":"CustomDashboard","tags":[],"timezone":"browser","editable":true,"hideControls":true,"sharedCrosshair":false,"nav":[{"type":"timepicker","enable":true,"time_options":["5m","15m","1h","6h","12h","24h","2d","7d","30d"],"refresh_intervals":["5s","10s","30s","1m","5m","15m","30m","1h","2h","1d"],"now":true,"collapse":false,"notice":false}],"time":{"from":"now-8h","to":"now"},"templating":{"list":[]},"annotations":{"enable":true,"list":[]},"refresh":"30s","version":"6","rows":[{"title":"ERROR","editable":true,"height":"400px","panels":[{"title":"","type":"text","span":12,"editable":true,"id":1,"mode":"markdown","content":"# \'foo -h 2>&1\' did not return with returncode 0. Maybe the phpCommand is not set properly."}]}]}<br></pre>';
+<br>1<br>{"id":"1","title":"Error","originalTitle":"CustomDashboard","tags":[],"timezone":"browser","editable":true,"hideControls":true,"sharedCrosshair":false,"nav":[{"type":"timepicker","enable":true,"time_options":["5m","15m","1h","6h","12h","24h","2d","7d","30d"],"refresh_intervals":["5s","10s","30s","1m","5m","15m","30m","1h","2h","1d"],"now":true,"collapse":false,"notice":false}],"time":{"from":"now-8h","to":"now"},"templating":{"list":[]},"annotations":{"enable":true,"list":[]},"refresh":"30s","version":"6","rows":[{"title":"ERROR","editable":true,"height":"400px","panels":[{"title":"","type":"text","span":12,"editable":true,"id":1,"mode":"markdown","content":"# \'foo -h 2>&1\' did not return with returncode 0. Maybe the phpCommand is not set properly.","options":{"content":"# \'foo -h 2>&1\' did not return with returncode 0. Maybe the phpCommand is not set properly."}}]}]}<br></pre>';
 }

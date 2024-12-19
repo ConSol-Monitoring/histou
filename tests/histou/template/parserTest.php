@@ -4,9 +4,8 @@ namespace tests\template;
 
 class ParserTest extends \MyPHPUnitFrameworkTestCase
 {
-    protected function setUp()
+    public function setUp(): void
     {
-        spl_autoload_register('__autoload');
         define('DEFAULT_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'default')));
         define('HEIGHT', '200px');
         define('INFLUX_FIELDSEPERATOR', '&');
@@ -97,7 +96,5 @@ perfLabel = load1, load5, load15
         $jsonString = $result[1]($perfData);
         $expected = '{"rows":[{"panels":[{"targets":[{"tags":[{"key":"host","operator":"=","value":"h1"},{"condition":"AND","key":"service","operator":"=","value":"s1"},{"condition":"AND","key":"command","operator":"=","value":"c1"},{"condition":"AND","key":"performanceLabel","operator":"=","value":"pl"}]}]}]}],"title":";h1 - s1;"}';
         $this->assertEquals($expected, $jsonString);
-
-
     }
 }

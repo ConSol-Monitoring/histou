@@ -59,7 +59,7 @@ class Str
     **/
     public static function makeRegex($string)
     {
-        if(self::startsWith($string, '/') && self::endsWith($string, '/')) {
+        if (self::startsWith($string, '/') && self::endsWith($string, '/')) {
             $string = substr($string, 1);
             $string = substr($string, 0, -1);
         }

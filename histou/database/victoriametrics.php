@@ -39,9 +39,9 @@ class Victoriametrics extends JSONDatabase
     {
         # get last value of all series from the last day:
         $req=sprintf('last_over_time({__name__=~"metrics.*",host="%s",service="%s"}[1d])', HOST, SERVICE);
-        //\histou\Debug::add('request: '. print_r ($req,true)."\n");   
-        $result = $this->makeGetRequest( $req  );
-	return $result;
+        //\histou\Debug::add('request: '. print_r ($req,true)."\n");
+        $result = $this->makeGetRequest($req);
+        return $result;
     }
 
     /**
@@ -53,36 +53,35 @@ class Victoriametrics extends JSONDatabase
     **/
     public function filterPerfdata($request, $host, $service)
     {
-    if ($request == null || empty($request['data']) || empty($request['data']['result'])) {
-        return "No data found";
-    }
-	$data = array('perfLabel' => array());
+        if ($request == null || empty($request['data']) || empty($request['data']['result'])) {
+            return "No data found";
+        }
+        $data = array('perfLabel' => array());
         $i=0;
-	foreach ($request['data']['result'] as $series) {
+        foreach ($request['data']['result'] as $series) {
                 $i+=1;
-		$data['host'] = $series['metric']['host'];
-		$data['service'] = $series['metric']['service'];
-		$data['command'] = $series['metric']['command'];
-		$label = $series['metric']['performanceLabel'];
-		if(!array_key_exists($label, $data['perfLabel'])) {
-			$data['perfLabel'][$label] = array();
-		}
-		if(!empty($series['metric']['unit'])) {
-			$unit = $series['metric']['unit'];
-			$data['perfLabel'][$label]['unit'] = $unit;
-		}
-                if(!empty($series['metric']['__name__'])) {
+            $data['host'] = $series['metric']['host'];
+            $data['service'] = $series['metric']['service'];
+            $data['command'] = $series['metric']['command'];
+            $label = $series['metric']['performanceLabel'];
+            if (!array_key_exists($label, $data['perfLabel'])) {
+                $data['perfLabel'][$label] = array();
+            }
+            if (!empty($series['metric']['unit'])) {
+                $unit = $series['metric']['unit'];
+                $data['perfLabel'][$label]['unit'] = $unit;
+            }
+            if (!empty($series['metric']['__name__'])) {
+                $field = preg_replace('/^metrics_/', '', $series['metric']['__name__']);
+            } else {
+                $field = sprintf('metrics%i', $i);
+            }
 
-			$field = preg_replace('/^metrics_/','',$series['metric']['__name__']);
-		} else {
-                        $field = sprintf('metrics%i',$i);
-                }
-
-        $data['perfLabel'][$label][$field] = $series['value'][1];
-	}
+            $data['perfLabel'][$label][$field] = $series['value'][1];
+        }
     
-    uksort($data['perfLabel'], "strnatcmp");
+        uksort($data['perfLabel'], "strnatcmp");
     #\histou\Debug::add('data: '. print_r ($data,true)."\n");
-    return $data;
+        return $data;
     }
 }

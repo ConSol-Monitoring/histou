@@ -10,7 +10,7 @@ class SinglestatpanelTest extends \MyPHPUnitFrameworkTestCase
         define('SHOW_LEGEND', false);
         define("DATABASE_TYPE", 'foo');
 
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $d = \histou\grafana\singlestatpanel\SinglestatPanelFactory::generatePanel('d1');
     }
 }
