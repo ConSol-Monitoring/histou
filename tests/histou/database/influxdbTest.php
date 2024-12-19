@@ -17,8 +17,16 @@ class InfluxdbTest extends \MyPHPUnitFrameworkTestCase
 
         $stub->expects($this->once())
         ->method('makeGetRequest')
-        ->willReturn(array('results' => array('1', '2')));
-        $this->assertSame('1', $stub->fetchPerfData());
+        ->willReturn(array('results' => array(
+            array(
+                "series" => array(
+                    "values" => array('1'),
+                    "tags" => array('1')
+                ),
+            )
+            )
+        ));
+        $this->assertSame('1', $stub->fetchPerfData()["series"]["values"][0]);
 
 
         $stub2 = $this->getMockBuilder($classname)
@@ -30,7 +38,7 @@ class InfluxdbTest extends \MyPHPUnitFrameworkTestCase
         ->method('makeGetRequest')
         ->willReturn(array('results' => array('', '2')));
         $this->assertSame('2', $stub2->fetchPerfData());
-        
+
         $stub3 = $this->getMockBuilder($classname)
         ->setConstructorArgs(array('url'))
         ->setMethods(array('makeGetRequest'))

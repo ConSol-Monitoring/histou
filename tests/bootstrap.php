@@ -11,14 +11,9 @@ PHP version 5
 
 require_once 'histou/bootstrap.php';
 
-class MyPHPUnitFrameworkTestCase extends \PHPUnit_Framework_TestCase
+class MyPHPUnitFrameworkTestCase extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
-    {
-        spl_autoload_register('__autoload');
-    }
-
-    private function delCache()
+    public function delCache(): void
     {
         $path = join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), '.histou_cache'));
         if (file_exists($path)) {
@@ -26,7 +21,7 @@ class MyPHPUnitFrameworkTestCase extends \PHPUnit_Framework_TestCase
         }
     }
 
-    protected function tearDown()
+    public function tearDown(): void
     {
         $path = join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test'));
         if (file_exists($path)) {

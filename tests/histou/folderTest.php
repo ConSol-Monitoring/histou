@@ -5,9 +5,8 @@ namespace tests;
 class FolderTest extends \MyPHPUnitFrameworkTestCase
 {
 
-    protected function setUp()
+    public function setUp(): void
     {
-        spl_autoload_register('__autoload');
         define('DEFAULT_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'default')));
         define('CUSTOM_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'custom')));
 
@@ -23,8 +22,8 @@ class FolderTest extends \MyPHPUnitFrameworkTestCase
     tested:
         - custom wins over default
         - just valid files are used
-		- missing folder
-	*/
+        - missing folder
+    */
     public function testLoad()
     {
         $files = array(
@@ -45,7 +44,7 @@ class FolderTest extends \MyPHPUnitFrameworkTestCase
         foreach ($files as $file) {
             touch($file);
         }
-        
+
 
         $templateFiles2 = \histou\Folder::loadFolders(
             array(CUSTOM_TEMPLATE_FOLDER, DEFAULT_TEMPLATE_FOLDER)
@@ -56,7 +55,7 @@ class FolderTest extends \MyPHPUnitFrameworkTestCase
             join(DIRECTORY_SEPARATOR, array(DEFAULT_TEMPLATE_FOLDER, 'template2.simple')),
         );
         $this->assertEquals(sort($expected), sort($templateFiles2));
-        
+
         \histou\Folder::loadFolders(array("adsf"));
     }
 }

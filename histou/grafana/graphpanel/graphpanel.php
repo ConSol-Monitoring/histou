@@ -68,7 +68,7 @@ abstract class GraphPanel extends \histou\grafana\Panel
                 "mode" => "multi"
             )
         );
-        if(!$legendShow) {
+        if (!$legendShow) {
             $this->data['options']['legend'] = array('showLegend' => false);
         }
     }
@@ -98,10 +98,10 @@ abstract class GraphPanel extends \histou\grafana\Panel
             $data['matcher']['options'] =  \histou\helper\str::makeRegex($data['matcher']['options']);
             $data['matcher']['id'] = 'byRegexp';
         }
-        if(!isset($this->data['fieldConfig'])) {
+        if (!isset($this->data['fieldConfig'])) {
             $this->data['fieldConfig'] = array();
         }
-        if(!isset($this->data['fieldConfig']['overrides'])) {
+        if (!isset($this->data['fieldConfig']['overrides'])) {
             $this->data['fieldConfig']['overrides'] = array();
         }
         array_push($this->data['fieldConfig']['overrides'], $data);
@@ -162,9 +162,10 @@ abstract class GraphPanel extends \histou\grafana\Panel
             )
         );
 
-        if($fill > 0) {
-            array_push($override['properties'],
-                    array(
+        if ($fill > 0) {
+            array_push(
+                $override['properties'],
+                array(
                         'id'    => 'custom.fillOpacity',
                         'value' => $fill*10
                     )
@@ -335,7 +336,7 @@ abstract class GraphPanel extends \histou\grafana\Panel
     **/
     public function setYAxis($alias, $number = 1)
     {
-        switch($number) {
+        switch ($number) {
             case "1":
                 $number = "left";
                 break;

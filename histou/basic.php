@@ -267,7 +267,6 @@ class Basic
         if ($returnCode != 0) {
             \histou\Basic::returnData(\histou\Debug::errorMarkdownDashboard("# '".$cmd."' did not return with returncode 0. Maybe the phpCommand is not set properly."), 1);
             return 1;
-
         }
         return 0;
     }

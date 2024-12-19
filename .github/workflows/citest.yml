@@ -1,0 +1,15 @@
+name: citest
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+    - run: sudo apt-get -y update
+    - run: sudo apt-get -y install phpunit
+    - uses: actions/checkout@v4
+    - run: tar xzf conf/vendor.tar.gz
+    - run: make test

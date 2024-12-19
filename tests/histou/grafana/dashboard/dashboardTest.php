@@ -52,7 +52,8 @@ class DashboardTest extends \MyPHPUnitFrameworkTestCase
     {
         define('INFLUXDB', 'influxdb');
         define("DATABASE_TYPE", 'foo');
-        $this->setExpectedException('\InvalidArgumentException');
+        define('VICTORIAMETRICS', 'victoriametrics');
+        $this->expectException('\InvalidArgumentException');
         $d = \histou\grafana\dashboard\DashboardFactory::generateDashboard('d1');
     }
 }

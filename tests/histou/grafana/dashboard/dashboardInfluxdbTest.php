@@ -27,7 +27,7 @@ class DashboardInfluxDBTest extends \MyPHPUnitFrameworkTestCase
         $this->assertSame(false, $d->toArray()['templating']['list'][1]['includeAll']);
         $this->assertSame(2, sizeof($d->toArray()['templating']['list']));
 
-        $this->assertSame('[[foo]]', $d->genTemplateVariable('foo'));
+        $this->assertSame('${foo:raw}', $d->genTemplateVariable('foo'));
     }
 
     public function testToArrayInfluxdb()
@@ -112,6 +112,5 @@ class DashboardInfluxDBTest extends \MyPHPUnitFrameworkTestCase
                           'rows' =>array (),
                         );
         $this->assertSame($expected, $a);
-
     }
 }

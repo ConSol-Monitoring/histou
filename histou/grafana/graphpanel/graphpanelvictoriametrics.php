@@ -20,32 +20,36 @@ namespace histou\grafana\graphpanel;
     }
 */
 
-class Target extends \ArrayObject implements \JsonSerializable {
+class Target extends \ArrayObject implements \JsonSerializable
+{
     #[\ReturnTypeWillChange]
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         $r = array(
             'datasource' => $this['datasource'],
             'legendFormat' => $this['legendFormat'],
             'expr' => $this->getExpr()
         );
         return $r;
-
     }
 
-    private function getExpr() {
+    private function getExpr()
+    {
         $expr =  'last_over_time({__name__=~"' . $this['measurement'] . "_(" . $this->getSelect() . ')",' . $this->getFilter() . '}[15m])';
         return 'label_replace(' . $expr . ', "__tmp_alias", "$1", "__name__", "metrics_(.*)")';
     }
 
-    private function getSelect() {
-       return join("|", array_map(function($x){
-           return $x[0];
-       }, $this['select']));
+    private function getSelect()
+    {
+        return join("|", array_map(function ($x) {
+            return $x[0];
+        }, $this['select']));
     }
 
-    private function getFilter() {
+    private function getFilter()
+    {
         $filter = array();
-        foreach($this['tags'] as $key => $val) {
+        foreach ($this['tags'] as $key => $val) {
             $operator = (array_key_exists('operator', $val) ? $val['operator'] : '=');
             array_push($filter, $key . $operator . '"' . $val['value'] . '"');
         }

@@ -4,9 +4,8 @@ namespace tests\template;
 
 class TemplateTest extends \MyPHPUnitFrameworkTestCase
 {
-    protected function setUp()
+    public function setUp(): void
     {
-        spl_autoload_register('__autoload');
         \histou\Basic::parsIni('histou.ini.example');
     }
 
@@ -58,7 +57,6 @@ class TemplateTest extends \MyPHPUnitFrameworkTestCase
         );
         foreach ($validTests as $test) {
             $this->assertSame($test[1], static::createTemplate($test[0])->isValid(), $test[0]);
-
         }
     }
 
@@ -216,7 +214,7 @@ class TemplateTest extends \MyPHPUnitFrameworkTestCase
 
     public function testFailCompareTemplate()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $templates = array(new \histou\template\loader(), new \histou\template\loader());
         usort($templates, '\histou\template\Template::compare');
     }
