@@ -1,4 +1,4 @@
-##next
+## v0.5.5 - 19.12.2024
 ### Change
 - improve loading javascript files
 
