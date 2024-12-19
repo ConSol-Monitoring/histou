@@ -20,8 +20,9 @@ return function (callback) {
     }
     var configUrl = url+'index.php?host='+host+'&service='+service+'&height='+height+'&legend='+legend+debug+disablePanelTitle+disablePerfdataLookup+specificTemplate+'&annotations='+annotations;
 
-    var flotAddons = url + 'flotAddons.js';
-    $.getScript(flotAddons, function (){});
+    if(jQuery(".js-histou-flotAddons").length === 0) {
+        $('head').append('<script class="js-histou-flotAddons" src="'+url+'flotAddons.js"></script>');
+    }
     if (!_.isUndefined(ARGS.customCSSFile)) {
         $('head').append('<link rel="stylesheet" href="' + ARGS.customCSSFile + '" type="text/css" />');
     }
@@ -75,8 +76,8 @@ return function (callback) {
         }
     ).done(
         function (result) {
-                console.log(result);
-                callback(result);
+            console.log(result);
+            callback(result);
         }
     ).fail(
         function (result) {
