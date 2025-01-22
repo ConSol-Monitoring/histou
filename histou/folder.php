@@ -4,7 +4,7 @@ Contains Folder Class.
 PHP version 5
 @category Folder_Class
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -15,7 +15,7 @@ Folder Class.
 PHP version 5
 @category Folder_Class
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/

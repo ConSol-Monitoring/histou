@@ -4,7 +4,7 @@ Contains Database Class.
 PHP version 5
 @category Database_Class
 @package Histou\database
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -15,7 +15,7 @@ Influxdb Class.
 PHP version 5
 @category Database_Class
 @package Histou\database
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -79,7 +79,7 @@ class Victoriametrics extends JSONDatabase
 
             $data['perfLabel'][$label][$field] = $series['value'][1];
         }
-    
+
         uksort($data['perfLabel'], "strnatcmp");
     #\histou\Debug::add('data: '. print_r ($data,true)."\n");
         return $data;

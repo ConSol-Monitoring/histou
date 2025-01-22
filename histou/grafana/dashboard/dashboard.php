@@ -4,7 +4,7 @@ Contains Dashboard Class.
 PHP version 5
 @category Dashboard_Class
 @package Histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -15,7 +15,7 @@ Dashboard Class.
 PHP version 5
 @category Dashboard_Class
 @package Histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -92,7 +92,7 @@ abstract class Dashboard
     {
         $this->data['editable'] = $editable;
     }
-    
+
     /**
     Enable sharedCrosshair.
     @param boolean $sharedCrosshair.

@@ -4,7 +4,7 @@ This template is used for check_nwc_health with --mode interface-*.
 PHP version 5
 @category Template_File
 @package Histou/templates/default
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/

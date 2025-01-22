@@ -4,7 +4,7 @@ Contains Helper Class.
 PHP version 5
 @category Folder_Class
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -15,7 +15,7 @@ Helper Class.
 PHP version 5
 @category Helper_Class
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -40,7 +40,7 @@ class CustomTime
         }
         return $matches[1]*CustomTime::$units[$matches[2]];
     }
-    
+
     public static function getLongestTime(array $durations)
     {
         $absDurations = array();

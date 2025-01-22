@@ -4,7 +4,7 @@ Contains types of Panels.
 PHP version 5
 @category Panel_Class
 @package Histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -62,7 +62,7 @@ Base Panel.
 PHP version 5
 @category Panel_Class
 @package Histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/

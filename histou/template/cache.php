@@ -4,7 +4,7 @@ Contains a cache for templates.
 PHP version 5
 @category Template_Class
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -20,7 +20,7 @@ Cache Class.
 PHP version 5
 @category Cache_Class
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/

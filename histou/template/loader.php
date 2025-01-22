@@ -4,7 +4,7 @@ Loads Templates from files.
 PHP version 5
 @category Loader
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -15,7 +15,7 @@ Loads Templates from files.
 PHP version 5
 @category Loader
 @package histou
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
@@ -35,7 +35,7 @@ class Loader
             return static::loadSimpleTemplates($filename);
         }
     }
-    
+
     /**
     Creates ForecastTemplate from File.
     @param string $filename foldername.
@@ -50,7 +50,7 @@ class Loader
         include $filename;
         return new ForecastTemplate($filename, $rule, $forecast);
     }
-    
+
     /**
     Creates a Basic Template.
     @param string $filename foldername.

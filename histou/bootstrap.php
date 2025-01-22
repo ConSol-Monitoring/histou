@@ -4,7 +4,7 @@ This file is used for bootstrapping the env.
 PHP version 5
 @category bootstrap
 @package default
-@author Philip Griesbacher <griesbacher@consol.de>
+@author Philip Griesbacher
 @license http://opensource.org/licenses/gpl-license.php GNU Public License
 @link https://github.com/ConSol/histou
 **/
