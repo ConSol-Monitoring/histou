@@ -57,6 +57,9 @@ class GraphPanelInfluxdb extends GraphPanel
         foreach ($filterTags as $key => $value) {
             $condition = (array_key_exists('condition', $value) ? $value['condition'] : 'AND');
             $operator = (array_key_exists('operator', $value) ? $value['operator'] : '=');
+            if($operator === '=' && preg_match('/^\/.*\/$/', $value['value'])) {
+                $operator = '=~';
+            }
             if ($i == 0) {
                 array_push($tags, array('key'=> $key, 'operator' => $operator, 'value' => $value['value'] ));
             } else {

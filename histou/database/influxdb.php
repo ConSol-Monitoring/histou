@@ -41,11 +41,11 @@ class Influxdb extends JSONDatabase
         $seriesLimit = 100;
         $result = $this->makeGetRequest(
             sprintf(
-                "select * from metrics where host='%s' and service='%s' GROUP BY performanceLabel ORDER BY time DESC LIMIT 1 SLIMIT ".($seriesLimit + 1),
+                "select * from metrics where host='%s' and service='%s' GROUP BY performanceLabel,command ORDER BY time DESC LIMIT 1 SLIMIT ".($seriesLimit + 1),
                 HOST,
                 SERVICE
             ).';'.sprintf(
-                "select * from metrics where host='%s' and service='%s' GROUP BY performanceLabel LIMIT 1 SLIMIT ".($seriesLimit + 1),
+                "select * from metrics where host='%s' and service='%s' GROUP BY performanceLabel,command LIMIT 1 SLIMIT ".($seriesLimit + 1),
                 HOST,
                 SERVICE
             )
@@ -81,12 +81,27 @@ class Influxdb extends JSONDatabase
         $data = array('host' => $host, 'service' => $service, 'perfLabel' => array());
         foreach ($request['series'] as $series) {
             $labelData = array();
+            if(isset($data['perfLabel'][$series['tags']['performanceLabel']])) {
+                $labelData = $data['perfLabel'][$series['tags']['performanceLabel']];
+            }
+            $command = "";
+            if(isset($series['tags']['command'])) {
+                $command = $series['tags']['command'];
+            }
             foreach ($series['columns'] as $index => $value) {
                 if (in_array($value, $this->perfKeys)) {
                     $labelData[$value] = $series['values'][0][$index];
-                } elseif ($value == 'command') {
-                    $data['command'] = $series['values'][0][$index];
                 }
+                if ($value == 'command') {
+                    $command = $series['values'][0][$index];
+                }
+            }
+            if($command !== '') {
+                $data['command'] = $command;
+                if(!isset($labelData['command'])) {
+                    $labelData['command'] = array();
+                }
+                $labelData['command'][$command] = $command;
             }
             $data['perfLabel'][$series['tags']['performanceLabel']] = $labelData;
         }
