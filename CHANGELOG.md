@@ -1,3 +1,7 @@
+## v0.5.6 - 23.01.2025
+### Change
+- support continues influxdb graphs if the command changes
+
 ## v0.5.5 - 19.12.2024
 ### Change
 - improve loading javascript files
