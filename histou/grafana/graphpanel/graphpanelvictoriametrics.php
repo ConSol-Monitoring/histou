@@ -50,6 +50,9 @@ class Target extends \ArrayObject implements \JsonSerializable
     {
         $filter = array();
         foreach ($this['tags'] as $key => $val) {
+            if($val === NULL) {
+                continue;
+            }
             $operator = (array_key_exists('operator', $val) ? $val['operator'] : '=');
             array_push($filter, $key . $operator . '"' . $val['value'] . '"');
         }
@@ -112,14 +115,14 @@ class GraphPanelVictoriametrics extends GraphPanel
             $target = $this->createTarget(array(
                                             'host' => array('value' => "^".$host."$", 'operator' => '=~'),
                                             'service' => array('value' => "^".$service."$", 'operator' => '=~'),
-                                            'command' => array('value' => "^".$command."$", 'operator' => '=~'),
+                                            'command' => $command == NULL ? NULL : array('value' => "^".$command."$", 'operator' => '=~'),
                                             'performanceLabel' => array('value' => "^".$performanceLabel."$", 'operator' => '=~')
                                             ));
         } else {
             $target = $this->createTarget(array(
                                             'host' => array('value' => $host),
                                             'service' => array('value' => $service),
-                                            'command' => array('value' => $command),
+                                            'command' => $command == NULL ? NULL : array('value' => $command),
                                             'performanceLabel' => array('value' => $performanceLabel)
                                             ));
         }
@@ -191,7 +194,7 @@ class GraphPanelVictoriametrics extends GraphPanel
                 array(
                         'host' => array('value' => \histou\helper\str::genRegex($host), 'operator' => '=~'),
                         'service' => array('value' => \histou\helper\str::genRegex($service), 'operator' => '=~'),
-                        'command' => array('value' => \histou\helper\str::genRegex($command), 'operator' => '=~'),
+                        'command' => $command == NULL ? NULL : array('value' => \histou\helper\str::genRegex($command), 'operator' => '=~'),
                         'performanceLabel' => array('value' => \histou\helper\str::genRegex($performanceLabel), 'operator' => '=~'),
                         'downtime' => array('value' => "true")
                     )
@@ -201,7 +204,7 @@ class GraphPanelVictoriametrics extends GraphPanel
                 array(
                         'host' => array('value' => $host),
                         'service' => array('value' => $service),
-                        'command' => array('value' => $command),
+                        'command' => $command == NULL ? NULL : array('value' => $command),
                         'performanceLabel' => array('value' => $performanceLabel),
                         'downtime' => array('value' => "true")
                     )
