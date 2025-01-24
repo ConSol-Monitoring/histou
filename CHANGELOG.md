@@ -1,3 +1,7 @@
+## next
+### Change
+- remove command name from default template
+
 ## v0.5.6 - 23.01.2025
 ### Change
 - support continues influxdb graphs if the command changes

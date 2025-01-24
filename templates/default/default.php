@@ -56,24 +56,22 @@ $genTemplate = function ($perfData) {
     $dashboard = \histou\grafana\dashboard\DashboardFactory::generateDashboard($perfData['host'].'-'.$perfData['service']);
     foreach ($perfData['perfLabel'] as $key => $values) {
         $commandName = $perfData['command'];
-        $panelTitle = $perfData['host'].' - '.$perfData['service'].' - '.$commandName.' '.$key;
         if(isset($values['command'])) {
             if(count($values['command']) > 1) {
                 $commandName = "/".implode("|", $values['command'])."/";
-                $panelTitle = $perfData['host'].' - '.$perfData['service'].' - '.$key;
             } else {
                 $commandName = array_values($values['command'])[0];
-                $panelTitle = $perfData['host'].' - '.$perfData['service'].' - '.$commandName.' - '.$key;
             }
         }
-        $row = new \histou\grafana\Row($perfData['host'].' '.$perfData['service'].' '.$commandName);
+        $panelTitle = $perfData['host'].' - '.$perfData['service'].' - '.$key;
+        $row = new \histou\grafana\Row($perfData['host'].' '.$perfData['service']);
         $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($panelTitle);
 
-        $target = $panel->genTargetSimple($perfData['host'], $perfData['service'], $commandName, $key);
+        $target = $panel->genTargetSimple($perfData['host'], $perfData['service'], NULL, $key);
         if (isset($values['unit'])) {
             if ($values['unit'] == "c") {
                 //create a new Target if the type is counter, with non_negative_derivative in select
-                $target = $panel->genTarget($perfData['host'], $perfData['service'], $commandName, $key, '#085DFF', '', false, "\histou\grafana\graphpanel\GraphPanelInfluxdb::createCounterSelect");
+                $target = $panel->genTarget($perfData['host'], $perfData['service'], NULL, $key, '#085DFF', '', false, "\histou\grafana\graphpanel\GraphPanelInfluxdb::createCounterSelect");
             } else {
                 $panel->setLeftUnit($values['unit']);
             }
@@ -84,14 +82,14 @@ $genTemplate = function ($perfData) {
 
         if (isset($values['unit']) && $values['unit'] == "c") {
             //create a new Target if the type is counter, with non_negative_derivative in select
-            $downtime = $panel->genDowntimeTarget($perfData['host'], $perfData['service'], $commandName, $key, '', false, "\histou\grafana\graphpanel\GraphPanelInfluxdb::createCounterSelect");
+            $downtime = $panel->genDowntimeTarget($perfData['host'], $perfData['service'], NULL, $key, '', false, "\histou\grafana\graphpanel\GraphPanelInfluxdb::createCounterSelect");
         } else {
-            $downtime = $panel->genDowntimeTarget($perfData['host'], $perfData['service'], $commandName, $key);
+            $downtime = $panel->genDowntimeTarget($perfData['host'], $perfData['service'], NULL, $key);
         }
         $panel->addTarget($downtime);
 
         // Used to display forecast data
-        $forecast = $panel->genForecastTarget($perfData['host'], $perfData['service'], $commandName, $key);
+        $forecast = $panel->genForecastTarget($perfData['host'], $perfData['service'], NULL, $key);
         if ($forecast) {
             $panel->addTarget($forecast);
         }
