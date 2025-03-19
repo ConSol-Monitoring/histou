@@ -1,3 +1,7 @@
+## next
+### Fixes
+- fix annotations with timeseries panel
+
 ## v0.5.7 - 16.02.2025
 ### Change
 - remove command name from default template
