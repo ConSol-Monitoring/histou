@@ -43,6 +43,13 @@ class DashboardInfluxDB extends Dashboard
             "lineColor" => $lineColor,
             "name" => $name,
             "query" => $query,
+            "target" => array(
+                "fromAnnotations": true,
+                "query": $query,
+                "rawQuery": true,
+                "refId": "Anno",
+                "textEditor": true
+            ),
             "showLine" => true,
             "tagsColumn" => $tags,
             "textColumn" => $text,
