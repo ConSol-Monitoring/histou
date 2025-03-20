@@ -37,22 +37,22 @@ class DashboardInfluxDB extends Dashboard
             $this->data['annotations']['list'],
             array(
             "datasource" => $datasource,
-            "enable" => $enabled,
-            "iconColor" => $iconColor,
-            "iconSize" => $iconSize,
-            "lineColor" => $lineColor,
-            "name" => $name,
-            "query" => $query,
-            "target" => array(
-                "fromAnnotations": true,
-                "query": $query,
-                "rawQuery": true,
-                "refId": "Anno",
-                "textEditor": true
+            "enable"     => $enabled,
+            "iconColor"  => $iconColor,
+            "iconSize"   => $iconSize,
+            "lineColor"  => $lineColor,
+            "name"       => $name,
+            "query"      => $query,
+            "target"     => array(
+                "fromAnnotations" => true,
+                "query"           => $query,
+                "rawQuery"        => true,
+                "refId"           => "Anno",
+                "textEditor"      => true
             ),
-            "showLine" => true,
-            "tagsColumn" => $tags,
-            "textColumn" => $text,
+            "showLine"    => true,
+            "tagsColumn"  => $tags,
+            "textColumn"  => $text,
             "titleColumn" => $title
             )
         );
