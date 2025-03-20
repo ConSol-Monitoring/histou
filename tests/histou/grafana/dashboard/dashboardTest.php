@@ -29,11 +29,11 @@ class DashboardTest extends \MyPHPUnitFrameworkTestCase
                                   'name' => 'aname',
                                   'query' => 'query!!',
                                   'target' => Array(
-                                    'fromAnnotations' => true
-                                    'query' => 'query!!'
-                                    'rawQuery' => true
-                                    'refId' => 'Anno'
-                                    'textEditor' => true
+                                    'fromAnnotations' => true,
+                                    'query' => 'query!!',
+                                    'rawQuery' => true,
+                                    'refId' => 'Anno',
+                                    'textEditor' => true,
                                   ),
                                   'showLine' => true,
                                   'tagsColumn' => 'tags',
