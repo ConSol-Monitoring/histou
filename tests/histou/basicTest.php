@@ -59,7 +59,7 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         $this->assertSame(1, \histou\Basic::testConfig());
         $err = ob_get_contents();
         ob_end_clean();
-        $this->assertSame($this->trim_multiline_string($err), $this->trim_multiline_string($this->wrongPhpCommand));
+        $this->assertSame($this->trimMultilineString($err), $this->trimMultilineString($this->wrongPhpCommand));
     }
 
     public function testParseIniInflux()
@@ -108,7 +108,7 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         $out1 = ob_get_contents();
         ob_end_clean();
 
-        $this->assertSame($this->trim_multiline_string($this->emptyDashboard), $this->trim_multiline_string($out1));
+        $this->assertSame($this->trimMultilineString($this->emptyDashboard), $this->trimMultilineString($out1));
         $_GET["callback"] = 1;
         ob_start();
         \histou\Basic::returnData('{"foo":"bar"}');
@@ -123,7 +123,7 @@ class BasicTest extends \MyPHPUnitFrameworkTestCase
         $this->assertStringContainsString("<pre>Don't know what to do with this type: integer", $out3);
     }
 
-    private function trim_multiline_string($multiline_string)
+    private function trimMultilineString($multiline_string)
     {
         $lines = explode("\n", $multiline_string);
         $trimmed_lines = array_map('trim', $lines);
