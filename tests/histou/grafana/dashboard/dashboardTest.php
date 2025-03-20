@@ -28,6 +28,13 @@ class DashboardTest extends \MyPHPUnitFrameworkTestCase
                                   'lineColor' => '#234',
                                   'name' => 'aname',
                                   'query' => 'query!!',
+                                  'target' => Array(
+                                    'fromAnnotations' => true
+                                    'query' => 'query!!'
+                                    'rawQuery' => true
+                                    'refId' => 'Anno'
+                                    'textEditor' => true
+                                  ),
                                   'showLine' => true,
                                   'tagsColumn' => 'tags',
                                   'textColumn' => 'text',
