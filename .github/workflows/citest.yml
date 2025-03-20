@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: sudo apt-get -y update
-    - run: sudo apt-get -y install phpunit
+    - run: sudo apt-get -y install phpunit php-codesniffer
     - uses: actions/checkout@v4
     - run: make test
     - run: make fmt
