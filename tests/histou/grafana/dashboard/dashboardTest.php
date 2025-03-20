@@ -28,7 +28,7 @@ class DashboardTest extends \MyPHPUnitFrameworkTestCase
                                   'lineColor' => '#234',
                                   'name' => 'aname',
                                   'query' => 'query!!',
-                                  'target' => Array(
+                                  'target' => array(
                                     'fromAnnotations' => true,
                                     'query' => 'query!!',
                                     'rawQuery' => true,

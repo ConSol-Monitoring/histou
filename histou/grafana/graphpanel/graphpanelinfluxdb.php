@@ -55,12 +55,12 @@ class GraphPanelInfluxdb extends GraphPanel
         $tags = array();
         $i = 0;
         foreach ($filterTags as $key => $value) {
-            if($value === NULL) {
+            if ($value === null) {
                 continue;
             }
             $condition = (array_key_exists('condition', $value) ? $value['condition'] : 'AND');
             $operator = (array_key_exists('operator', $value) ? $value['operator'] : '=');
-            if($operator === '=' && preg_match('/^\/.*\/$/', $value['value'])) {
+            if ($operator === '=' && preg_match('/^\/.*\/$/', $value['value'])) {
                 $operator = '=~';
             }
             if ($i == 0) {
@@ -93,14 +93,14 @@ class GraphPanelInfluxdb extends GraphPanel
             $target = $this->createTarget(array(
                                             'host' => array('value' => \histou\helper\str::genRegex($host), 'operator' => '=~'),
                                             'service' => array('value' => \histou\helper\str::genRegex($service), 'operator' => '=~'),
-                                            'command' => $command == NULL ? NULL : array('value' => \histou\helper\str::genRegex($command), 'operator' => '=~'),
+                                            'command' => $command == null ? null : array('value' => \histou\helper\str::genRegex($command), 'operator' => '=~'),
                                             'performanceLabel' => array('value' => \histou\helper\str::genRegex($performanceLabel), 'operator' => '=~')
                                             ));
         } else {
             $target = $this->createTarget(array(
                                             'host' => array('value' => $host),
                                             'service' => array('value' => $service),
-                                            'command' => $command == NULL ? NULL : array('value' => $command),
+                                            'command' => $command == null ? null : array('value' => $command),
                                             'performanceLabel' => array('value' => $performanceLabel)
                                             ));
         }
@@ -174,7 +174,7 @@ class GraphPanelInfluxdb extends GraphPanel
                 array(
                         'host' => array('value' => \histou\helper\str::genRegex($host), 'operator' => '=~'),
                         'service' => array('value' => \histou\helper\str::genRegex($service), 'operator' => '=~'),
-                        'command' => $command == NULL ? NULL : array('value' => \histou\helper\str::genRegex($command), 'operator' => '=~'),
+                        'command' => $command == null ? null : array('value' => \histou\helper\str::genRegex($command), 'operator' => '=~'),
                         'performanceLabel' => array('value' => \histou\helper\str::genRegex($performanceLabel), 'operator' => '=~'),
                         'downtime' => array('value' => "true")
                     )
@@ -184,7 +184,7 @@ class GraphPanelInfluxdb extends GraphPanel
                 array(
                         'host' => array('value' => $host),
                         'service' => array('value' => $service),
-                        'command' => $command == NULL ? NULL : array('value' => $command),
+                        'command' => $command == null ? null : array('value' => $command),
                         'performanceLabel' => array('value' => $performanceLabel),
                         'downtime' => array('value' => "true")
                     )

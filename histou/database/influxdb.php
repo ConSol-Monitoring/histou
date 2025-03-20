@@ -81,11 +81,11 @@ class Influxdb extends JSONDatabase
         $data = array('host' => $host, 'service' => $service, 'perfLabel' => array());
         foreach ($request['series'] as $series) {
             $labelData = array();
-            if(isset($data['perfLabel'][$series['tags']['performanceLabel']])) {
+            if (isset($data['perfLabel'][$series['tags']['performanceLabel']])) {
                 $labelData = $data['perfLabel'][$series['tags']['performanceLabel']];
             }
             $command = "";
-            if(isset($series['tags']['command'])) {
+            if (isset($series['tags']['command'])) {
                 $command = $series['tags']['command'];
             }
             foreach ($series['columns'] as $index => $value) {
@@ -96,9 +96,9 @@ class Influxdb extends JSONDatabase
                     $command = $series['values'][0][$index];
                 }
             }
-            if($command !== '') {
+            if ($command !== '') {
                 $data['command'] = $command;
-                if(!isset($labelData['command'])) {
+                if (!isset($labelData['command'])) {
                     $labelData['command'] = array();
                 }
                 $labelData['command'][$command] = $command;

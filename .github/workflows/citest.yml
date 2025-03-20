@@ -11,5 +11,5 @@ jobs:
     - run: sudo apt-get -y update
     - run: sudo apt-get -y install phpunit
     - uses: actions/checkout@v4
-    - run: tar xzf conf/vendor.tar.gz
     - run: make test
+    - run: make fmt
