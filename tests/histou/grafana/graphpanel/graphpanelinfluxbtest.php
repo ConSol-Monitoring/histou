@@ -150,7 +150,7 @@ class GraphpanelInfluxdbTest extends \MyPHPUnitFrameworkTestCase
                                     'type' => 'time'
                                     ),
                                 array (
-                                    'params' => array ( 'linear' ),
+                                    'params' => array ( 'null' ),
                                     'type' => 'fill'
                                 )
                             )
@@ -212,7 +212,7 @@ class GraphpanelInfluxdbTest extends \MyPHPUnitFrameworkTestCase
                                 ),
                             array(
                                 'params' => array(
-                                    0 => 'linear'
+                                    0 => 'null'
                                 ),
                                 'type' => 'fill'
                             )
