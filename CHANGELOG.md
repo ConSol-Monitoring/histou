@@ -1,4 +1,6 @@
 ## next
+### Change
+- show gaps larger than 60m
 ### Fixes
 - fix annotations with timeseries panel
 
