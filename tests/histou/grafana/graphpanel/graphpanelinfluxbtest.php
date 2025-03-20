@@ -16,556 +16,59 @@ class GraphpanelInfluxdbTest extends \MyPHPUnitFrameworkTestCase
         $this->init();
         $gpanel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel('gpanel');
 
-        $this->markTestIncomplete('this test needs to be reworked to new timeseries panel layout');
-        return;
-        $this->assertSame(2, $gpanel->toArray()['linewidth']);
-
-        $this->assertSame(0, sizeof($gpanel->toArray()['seriesOverrides']));
-        $gpanel->addRegexColor('/.*/', '#FFF');
         $this->assertSame(1, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
-        $this->assertSame('/.*/', $gpanel->toArray()['fieldConfig']['overrides'][0]['alias']);
-        $gpanel->addRegexColor('/-value', '#FFF');
+        $gpanel->addRegexColor('/.*/', '#FFF');
         $this->assertSame(2, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
-        $this->assertSame('/\/-value/', $gpanel->toArray()['fieldConfig']['overrides'][1]['alias']);
+        $this->assertSame('/.*/', $gpanel->toArray()['fieldConfig']['overrides'][1]['matcher']['options']);
+        $gpanel->addRegexColor('/-value', '#FFF');
+        $this->assertSame(3, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
+        $this->assertSame('/-value', $gpanel->toArray()['fieldConfig']['overrides'][2]['matcher']['options']);
 
         $gpanel->addAliasColor('foo', '#123');
-        $this->assertSame(1, sizeof($gpanel->toArray()['aliasColors']));
-        $this->assertSame('#123', $gpanel->toArray()['aliasColors']['foo']);
+        $this->assertSame(4, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
+        $this->assertSame('#123', $gpanel->toArray()['fieldConfig']['overrides'][3]['properties'][0]['value']['fixedColor']);
 
         $gpanel->setleftYAxisLabel('ms');
-        $this->assertSame('ms', $gpanel->toArray()['yaxes'][0]['label']);
+        $this->assertSame('ms', $gpanel->toArray()['fieldConfig']['defaults']['custom']['axisLabel']);
 
         //Convert Unit
         //left
         $gpanel->setLeftUnit('%');
-        $this->assertSame('percent', $gpanel->toArray()['yaxes'][0]['format']);
-        $this->assertSame('short', $gpanel->toArray()['yaxes'][1]['format']);
+        $this->assertSame('percent', $gpanel->toArray()['fieldConfig']['defaults']['unit']);
         $gpanel->setLeftUnit('s');
-        $this->assertSame('s', $gpanel->toArray()['yaxes'][0]['format']);
-        $this->assertSame('short', $gpanel->toArray()['yaxes'][1]['format']);
+        $this->assertSame('s', $gpanel->toArray()['fieldConfig']['defaults']['unit']);
         $gpanel->setLeftUnit('foo');
-        $this->assertSame('short', $gpanel->toArray()['yaxes'][0]['format']);
-        $this->assertSame('short', $gpanel->toArray()['yaxes'][1]['format']);
-        $this->assertSame('foo', $gpanel->toArray()['yaxes'][0]['label']);
+        $this->assertSame('short', $gpanel->toArray()['fieldConfig']['defaults']['unit']);
 
         //Y Min Max
         $gpanel->setLeftYAxisMinMax(0);
-        $this->assertSame(0, $gpanel->toArray()['yaxes'][0]['min']);
-        $this->assertSame(false, array_key_exists('max', $gpanel->toArray()['yaxes'][0]));
+        $this->assertSame(0, $gpanel->toArray()['fieldConfig']['defaults']['min']);
+        $this->assertSame(false, array_key_exists('max', $gpanel->toArray()['fieldConfig']['defaults']));
         $gpanel->setLeftYAxisMinMax(1, 2);
-        $this->assertSame(1, $gpanel->toArray()['yaxes'][0]['min']);
-        $this->assertSame(2, $gpanel->toArray()['yaxes'][0]['max']);
-
-        $gpanel->setRightAxisMinMax(0);
-        $this->assertSame(0, $gpanel->toArray()['yaxes'][1]['min']);
-        $this->assertSame(false, array_key_exists('max', $gpanel->toArray()['yaxes'][1]));
-        $gpanel->setRightAxisMinMax(1, 2);
-        $this->assertSame(1, $gpanel->toArray()['yaxes'][1]['min']);
-        $this->assertSame(2, $gpanel->toArray()['yaxes'][1]['max']);
+        $this->assertSame(1, $gpanel->toArray()['fieldConfig']['defaults']['min']);
+        $this->assertSame(2, $gpanel->toArray()['fieldConfig']['defaults']['max']);
 
         //Linewidth
         $gpanel->setLinewidth(10);
         $this->assertSame(10, $gpanel->toArray()['linewidth']);
 
         //Fill below
-        $this->assertSame(0, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
+        $this->assertSame(4, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
         $gpanel->fillBelowLine('foo', 1);
-        $this->assertSame(1, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
+        $this->assertSame(5, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
 
         //Negate Y
-        $this->assertSame(1, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
+        $this->assertSame(5, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
         $gpanel->negateY('foo');
-        $this->assertSame(2, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
-        $this->assertSame(
-            array('alias' => 'foo', 'transform' => 'negative-Y'),
-            $gpanel->toArray()['fieldConfig']['overrides'][1]
-        );
+        $this->assertSame(6, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
 
         //setYAxis
-        $this->assertSame(2, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
+        $this->assertSame(6, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
         $gpanel->setYAxis('foo');
         $gpanel->setYAxis('bar', 2);
-        $this->assertSame(4, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
-        $this->assertSame(
-            array('alias' => 'foo', 'yaxis' => 1),
-            $gpanel->toArray()['fieldConfig']['overrides'][2]
-        );
-        $this->assertSame(
-            array('alias' => 'bar', 'yaxis' => 2),
-            $gpanel->toArray()['fieldConfig']['overrides'][3]
-        );
+        $this->assertSame(8, sizeof($gpanel->toArray()['fieldConfig']['overrides']));
 
         $target1 = $gpanel->genTargetSimple('host', 'service', 'command', 'perfLabel');
-        $expected = array('measurement' => 'metrics', 'alias' => '$col',
-                            'select' =>  array(array(array(
-                                                        'type' => 'field',
-                                                        'params' => array ('value')
-                                                            ),
-                                                    array (
-                                                        'type' => 'mean',
-                                                        'params' => array (),
-                                                            ),
-                                                    array (
-                                                        'type' => 'alias',
-                                                        'params' => array ('perfLabel-value'),
-                                                            ),
-                                                    ),
-                                                ),
-                            'tags' => array(array(
-                                                'key' => 'host',
-                                                'operator' => '=',
-                                                'value' => 'host',
-                                                ),
-                                            array (
-                                                'condition' => 'AND',
-                                                'key' => 'service',
-                                                'operator' => '=',
-                                                'value' => 'service',
-                                            ),
-                                            array (
-                                                'condition' => 'AND',
-                                                'key' => 'command',
-                                                'operator' => '=',
-                                                'value' => 'command',
-                                            ),
-                                            array (
-                                                'condition' => 'AND',
-                                                'key' => 'performanceLabel',
-                                                'operator' => '=',
-                                                'value' => 'perfLabel',
-                                            ),
-                                        ),
-                            'dsType' => 'influxdb', 'resultFormat' => 'time_series', 'datasource' => 'nagflux',
-        );
-        $this->assertSame($expected, $target1);
-
-        $target1 = $gpanel->addWarnToTarget($target1);
-        //$this->assertSame($expected, $target1);
-        $expected  =   array (  array (     array ( 'type' => 'field','params' => array ('value')),
-                                        array ('type' => 'mean','params' =>array ()),
-                                        array ('type' => 'alias','params' =>array ('perfLabel-value')),
-                                    ),
-                                array (     array ('type' => 'field','params' =>array ('warn')),
-                                        array ('type' => 'mean','params' =>array ()),
-                                        array ('type' => 'alias','params' => array ('-warn')),
-                                    ),
-                                array (     array ('type' => 'field','params' =>array ('warn-min')),
-                                        array ('type' => 'mean','params' =>array ()),
-                                        array ('type' => 'alias','params' =>array ('-warn-min')),
-                                    ),
-                                array (     array ('type' => 'field','params' =>array ('warn-max')),
-                                        array ('type' => 'mean','params' =>array ()),
-                                        array ('type' => 'alias','params' =>array ('-warn-max')),
-                                    ),
-                            );
-        $this->assertSame($expected, $target1['select']);
-        $target2 = $gpanel->genTargetSimple('host', 'service', 'command', 'perfLabel');
-        $target2 = $gpanel->addWarnToTarget($target2, 'alias123', false);
-        $expected = array (
-                          'measurement' => 'metrics',
-                          'alias' => '$col',
-                          'select' =>
-                          array (
-                            array (
-                              array (
-                                'type' => 'field',
-                                'params' =>
-                                array (
-                                  'value',
-                                ),
-                              ),
-                              array (
-                                'type' => 'mean',
-                                'params' =>
-                                array (
-                                ),
-                              ),
-                              array (
-                                'type' => 'alias',
-                                'params' =>
-                                array (
-                                 'perfLabel-value',
-                                ),
-                              ),
-                            ),
-                            array (
-                              array (
-                                'type' => 'field',
-                                'params' =>
-                                array (
-                                 'warn',
-                                ),
-                              ),
-                              array (
-                                'type' => 'mean',
-                                'params' =>
-                                array (
-                                ),
-                              ),
-                              array (
-                                'type' => 'alias',
-                                'params' =>
-                                array (
-                                 'alias123-warn',
-                                ),
-                              ),
-                            ),
-                            array (
-                              array (
-                                'type' => 'field',
-                                'params' =>
-                                array (
-                                  'warn-min',
-                                ),
-                              ),
-                              array (
-                                'type' => 'mean',
-                                'params' =>
-                                array (
-                                ),
-                              ),
-                              array (
-                                'type' => 'alias',
-                                'params' =>
-                                array (
-                                  'alias123-warn-min',
-                                ),
-                              ),
-                            ),
-                            array (
-                              array (
-                                'type' => 'field',
-                                'params' =>
-                                array (
-                                  'warn-max',
-                                ),
-                              ),
-                              array (
-                                'type' => 'mean',
-                                'params' =>
-                                array (
-                                ),
-                              ),
-                              array (
-                                'type' => 'alias',
-                                'params' =>
-                                array (
-                                  'alias123-warn-max',
-                                ),
-                              ),
-                            ),
-                          ),
-                          'tags' =>
-                          array (
-                            array (
-                              'key' => 'host',
-                              'operator' => '=',
-                              'value' => 'host',
-                            ),
-                            array (
-                              'condition' => 'AND',
-                              'key' => 'service',
-                              'operator' => '=',
-                              'value' => 'service',
-                            ),
-                            array (
-                              'condition' => 'AND',
-                              'key' => 'command',
-                              'operator' => '=',
-                              'value' => 'command',
-                            ),
-                            array (
-                              'condition' => 'AND',
-                              'key' => 'performanceLabel',
-                              'operator' => '=',
-                              'value' => 'perfLabel',
-                            ),
-                          ),
-                          'dsType' => 'influxdb',
-                          'resultFormat' => 'time_series',
-                          'datasource' => 'nagflux',
-                        );
-        $this->assertSame($expected, $target2);
-        $target3 = $gpanel->genTargetSimple('host', 'service', 'command', 'perfLabel');
-        $target3 = $gpanel->addCritToTarget($target3);
-        $expected = array(
-                            array(
-                                array(
-                                    'type' => 'field',
-                                    'params' => array(
-                                        'value',
-                                    ) ,
-                                ) ,
-                                array(
-                                    'type' => 'mean',
-                                    'params' => array() ,
-                                ) ,
-                                array(
-                                    'type' => 'alias',
-                                    'params' => array(
-                                        'perfLabel-value',
-                                    ) ,
-                                ) ,
-                            ) ,
-                            array(
-                                array(
-                                    'type' => 'field',
-                                    'params' => array(
-                                        'crit',
-                                    ) ,
-                                ) ,
-                                array(
-                                    'type' => 'mean',
-                                    'params' => array() ,
-                                ) ,
-                                array(
-                                    'type' => 'alias',
-                                    'params' => array(
-                                        '-crit',
-                                    ) ,
-                                ) ,
-                            ) ,
-                            array(
-                                array(
-                                    'type' => 'field',
-                                    'params' => array(
-                                        'crit-min',
-                                    ) ,
-                                ) ,
-                                array(
-                                    'type' => 'mean',
-                                    'params' => array() ,
-                                ) ,
-                                array(
-                                    'type' => 'alias',
-                                    'params' => array(
-                                        '-crit-min',
-                                    ) ,
-                                ) ,
-                            ) ,
-                            array(
-                                array(
-                                    'type' => 'field',
-                                    'params' => array(
-                                        'crit-max',
-                                    ) ,
-                                ) ,
-                                array(
-                                    'type' => 'mean',
-                                    'params' => array() ,
-                                ) ,
-                                array(
-                                    'type' => 'alias',
-                                    'params' => array(
-                                        '-crit-max',
-                                    ) ,
-                                ) ,
-                            ) ,
-                        );
-        $this->assertSame($expected, $target3['select']);
-        $target4 = $gpanel->genTargetSimple('host', 'service', 'command', 'perfLabel');
-        $target4 = $gpanel->addCritToTarget($target4, 'alias123', false);
-        $expected = array(
-                        array(
-                            array(
-                                'type' => 'field',
-                                'params' => array(
-                                    'value',
-                                ) ,
-                            ) ,
-                            array(
-                                'type' => 'mean',
-                                'params' => array() ,
-                            ) ,
-                            array(
-                                'type' => 'alias',
-                                'params' => array(
-                                    'perfLabel-value',
-                                ) ,
-                            ) ,
-                        ) ,
-                        array(
-                            array(
-                                'type' => 'field',
-                                'params' => array(
-                                    'crit',
-                                ) ,
-                            ) ,
-                            array(
-                                'type' => 'mean',
-                                'params' => array() ,
-                            ) ,
-                            array(
-                                'type' => 'alias',
-                                'params' => array(
-                                    'alias123-crit',
-                                ) ,
-                            ) ,
-                        ) ,
-                        array(
-                            array(
-                                'type' => 'field',
-                                'params' => array(
-                                    'crit-min',
-                                ) ,
-                            ) ,
-                            array(
-                                'type' => 'mean',
-                                'params' => array() ,
-                            ) ,
-                            array(
-                                'type' => 'alias',
-                                'params' => array(
-                                    'alias123-crit-min',
-                                ) ,
-                            ) ,
-                        ) ,
-                        array(
-                            array(
-                                'type' => 'field',
-                                'params' => array(
-                                    'crit-max',
-                                ) ,
-                            ) ,
-                            array(
-                                'type' => 'mean',
-                                'params' => array() ,
-                            ) ,
-                            array(
-                                'type' => 'alias',
-                                'params' => array(
-                                    'alias123-crit-max',
-                                ) ,
-                            ) ,
-                        ) ,
-                    );
-        $this->assertSame($expected, $target4['select']);
-        $downtime1 = $gpanel->genDowntimeTarget('host', 'service', 'command', 'perfLabel');
-        $expectedDowntime = array(
-                                'measurement' => 'metrics',
-                                'alias' => '$col',
-                                'select' => array(
-                                    array(
-                                        array(
-                                            'type' => 'field',
-                                            'params' => array(
-                                                'value',
-                                            ) ,
-                                        ) ,
-                                        array(
-                                            'type' => 'mean',
-                                            'params' => array() ,
-                                        ) ,
-                                        array(
-                                            'type' => 'alias',
-                                            'params' => array(
-                                                'downtime',
-                                            ) ,
-                                        ) ,
-                                    ) ,
-                                ) ,
-                                'tags' => array(
-                                    array(
-                                        'key' => 'host',
-                                        'operator' => '=',
-                                        'value' => 'host',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'service',
-                                        'operator' => '=',
-                                        'value' => 'service',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'command',
-                                        'operator' => '=',
-                                        'value' => 'command',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'performanceLabel',
-                                        'operator' => '=',
-                                        'value' => 'perfLabel',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'downtime',
-                                        'operator' => '=',
-                                        'value' => 'true',
-                                    ) ,
-                                ) ,
-                                'dsType' => 'influxdb',
-                                'resultFormat' => 'time_series',
-                                'datasource' => 'nagflux',
-                            );
-        $this->assertSame($expectedDowntime, $downtime1);
-        $downtime2 = $gpanel->genDowntimeTarget('host', 'service', 'command', 'perfLabel', 'alias123');
-        $expectedDowntime = array(
-                                'measurement' => 'metrics',
-                                'alias' => '$col',
-                                'select' => array(
-                                    array(
-                                        array(
-                                            'type' => 'field',
-                                            'params' => array(
-                                                'value',
-                                            ) ,
-                                        ) ,
-                                        array(
-                                            'type' => 'mean',
-                                            'params' => array() ,
-                                        ) ,
-                                        array(
-                                            'type' => 'alias',
-                                            'params' => array(
-                                                'alias123',
-                                            ) ,
-                                        ) ,
-                                    ) ,
-                                ) ,
-                                'tags' => array(
-                                    array(
-                                        'key' => 'host',
-                                        'operator' => '=',
-                                        'value' => 'host',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'service',
-                                        'operator' => '=',
-                                        'value' => 'service',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'command',
-                                        'operator' => '=',
-                                        'value' => 'command',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'performanceLabel',
-                                        'operator' => '=',
-                                        'value' => 'perfLabel',
-                                    ) ,
-                                    array(
-                                        'condition' => 'AND',
-                                        'key' => 'downtime',
-                                        'operator' => '=',
-                                        'value' => 'true',
-                                    ) ,
-                                ) ,
-                                'dsType' => 'influxdb',
-                                'resultFormat' => 'time_series',
-                                'datasource' => 'nagflux',
-                            );
-        $this->assertSame($expectedDowntime, $downtime2);
-        $this->assertSame(0, sizeof($gpanel->toArray()['targets']));
-        $gpanel->addTarget($target1);
-        $this->assertSame(1, sizeof($gpanel->toArray()['targets']));
-        $gpanel->addTarget($downtime1);
-        $this->assertSame(2, sizeof($gpanel->toArray()['targets']));
-        $this->assertSame($downtime1, $gpanel->toArray()['targets'][1]);
     }
 
     public function testCreateGraphPanelInfluxdbRegex()
