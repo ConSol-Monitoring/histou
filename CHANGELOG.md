@@ -1,4 +1,4 @@
-## next
+## v0.5.8 - 20.03.2025
 ### Change
 - show gaps larger than 60m
 ### Fixes
