@@ -1,7 +1,6 @@
 <?php
 /**
 Contains a cache for templates.
-PHP version 5
 @category Template_Class
 @package histou
 @author Philip Griesbacher
@@ -17,7 +16,6 @@ define("RULE_KEY", 'template');
 
 /**
 Cache Class.
-PHP version 5
 @category Cache_Class
 @package histou
 @author Philip Griesbacher

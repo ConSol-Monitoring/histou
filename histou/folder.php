@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Folder Class.
-PHP version 5
 @category Folder_Class
 @package histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou;
 
 /**
 Folder Class.
-PHP version 5
 @category Folder_Class
 @package histou
 @author Philip Griesbacher

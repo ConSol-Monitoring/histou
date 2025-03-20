@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Database Class.
-PHP version 5
 @category Database_Class
 @package Histou\database
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\database;
 
 /**
 Influxdb Class.
-PHP version 5
 @category Database_Class
 @package Histou\database
 @author Philip Griesbacher
@@ -59,7 +57,8 @@ class Influxdb extends JSONDatabase
                 return null;
             }
             if (count($result['results'][0]["series"]) > $seriesLimit) {
-                $result['results'][0]["series"][$seriesLimit]["tags"]["performanceLabel"] = "{ERROR: MORE THAN $seriesLimit SERIES FOUND}"; # add brackets so it appears as last item
+                # add brackets so it appears as last item
+                $result['results'][0]["series"][$seriesLimit]["tags"]["performanceLabel"] = "{ERROR: MORE THAN $seriesLimit SERIES FOUND}";
                 $result['results'][0]["series"][$seriesLimit]["values"][0][1] = ""; # command name
             }
             return $result['results'][0];

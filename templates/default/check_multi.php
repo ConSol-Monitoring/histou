@@ -1,7 +1,6 @@
 <?php
 /**
 This template is used for check_multi.
-PHP version 5
 @category Template_File
 @package Histou/templates/default
 @author Philip Griesbacher

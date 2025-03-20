@@ -1,7 +1,6 @@
 <?php
 /**
 Contains types of Templates.
-PHP version 5
 @category Template_Class
 @package histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\template;
 
 /**
 Base Class Template.
-PHP version 5
 @category Template_Class
 @package histou
 @author Philip Griesbacher

@@ -1,7 +1,6 @@
 <?php
 /**
 Contains types of Panels.
-PHP version 5
 @category Panel_Class
 @package Histou
 @author Philip Griesbacher
@@ -62,7 +61,6 @@ class Target extends \ArrayObject implements \JsonSerializable
 
 /**
 Base Panel.
-PHP version 5
 @category Panel_Class
 @package Histou
 @author Philip Griesbacher

@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Database Class.
-PHP version 5
 @category Database_Class
 @package Histou\database
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\database;
 
 /**
 Influxdb Class.
-PHP version 5
 @category Database_Class
 @package Histou\database
 @author Philip Griesbacher

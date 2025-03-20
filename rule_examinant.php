@@ -1,7 +1,6 @@
 <?php
 /**
 Examinates rule files and returnes the best.
-PHP version 5
 @category Main_File
 @package Default
 @author Philip Griesbacher

@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Rule Class.
-PHP version 5
 @category Rule_Class
 @package histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\template;
 
 /**
 Rule Class.
-PHP version 5
 @category Rule_Class
 @package histou
 @author Philip Griesbacher

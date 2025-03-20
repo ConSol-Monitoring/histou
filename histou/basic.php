@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Basic Stuff.
-PHP version 5
 @category Basic_Stuff
 @package histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou;
 
 /**
 Basic Class.
-PHP version 5
 @category Basic_Class
 @package histou
 @author Philip Griesbacher

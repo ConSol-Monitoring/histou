@@ -1,7 +1,6 @@
 <?php
 /**
 Template for the icinga2 self check.
-PHP version 5
 @category Template_File
 @package Histou/templates/default
 @author Philip Griesbacher

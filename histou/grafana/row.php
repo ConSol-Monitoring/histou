@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Row Class.
-PHP version 5
 @category Row_Class
 @package Histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\grafana;
 
 /**
 Row Class.
-PHP version 5
 @category Row_Class
 @package Histou
 @author Philip Griesbacher

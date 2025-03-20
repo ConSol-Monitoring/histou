@@ -1,7 +1,6 @@
 <?php
 /**
 This File can be used to test templates, on which host/service they match.
-PHP version 5
 @category Debug_File
 @package Default
 @author Philip Griesbacher

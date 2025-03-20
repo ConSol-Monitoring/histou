@@ -1,7 +1,6 @@
 <?php
 /**
 Loads Templates from files.
-PHP version 5
 @category Loader
 @package histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\template;
 
 /**
 Loads Templates from files.
-PHP version 5
 @category Loader
 @package histou
 @author Philip Griesbacher

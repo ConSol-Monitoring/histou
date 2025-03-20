@@ -2,15 +2,18 @@
 <ruleset name="PHP">
     <description>The coding standard for standard PHP application</description>
     <rule ref="PSR2"/>
-	<exclude-pattern>*/cover/*</exclude-pattern>
-	<exclude-pattern>.js</exclude-pattern>
-	<exclude-pattern>index.php</exclude-pattern>
-	<exclude-pattern>testconfig.php</exclude-pattern>
-	<exclude-pattern>tests/bootstrap.php</exclude-pattern>
+    <exclude-pattern>*/cover/*</exclude-pattern>
+    <exclude-pattern>.js</exclude-pattern>
+    <exclude-pattern>lightbox/css/light.css</exclude-pattern>
+    <exclude-pattern>index.php</exclude-pattern>
+    <exclude-pattern>testconfig.php</exclude-pattern>
+    <exclude-pattern>tests/bootstrap.php</exclude-pattern>
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="160"/>
-            <property name="absoluteLineLimit" value="0"/>
+            <property name="lineLimit" value="180"/>
+            <property name="absoluteLineLimit" value="180"/>
         </properties>
+        <exclude-pattern>tests/*.php</exclude-pattern>
+        <exclude-pattern>templates/default/*.php</exclude-pattern>
     </rule>
 </ruleset>

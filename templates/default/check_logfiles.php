@@ -1,7 +1,6 @@
 <?php
 /**
 check_logfiles Template File.
-PHP version 5
 @category Template_File
 @package Histou/templates/default
 @author Philip Griesbacher

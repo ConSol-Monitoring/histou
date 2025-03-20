@@ -1,7 +1,6 @@
 <?php
 /**
 This template is used for check_nwc_health with --mode interface-*.
-PHP version 5
 @category Template_File
 @package Histou/templates/default
 @author Philip Griesbacher

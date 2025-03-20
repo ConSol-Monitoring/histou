@@ -2,7 +2,6 @@
 /**
 This is the main file.
 It returns an json Object when requested per jsonp or some debug output else.
-PHP version 5
 @category Main_File
 @package Default
 @author Philip Griesbacher

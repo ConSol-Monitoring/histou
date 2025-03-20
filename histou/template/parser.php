@@ -1,7 +1,6 @@
 <?php
 /**
 Parses Templates files and generates Code.
-PHP version 5
 @category Parser
 @package histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\template;
 
 /**
 Parses Templates files and generates Code.
-PHP version 5
 @category Parser
 @package histou
 @author Philip Griesbacher

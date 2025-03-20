@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Dashboard Class.
-PHP version 5
 @category Dashboard_Class
 @package Histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\grafana\dashboard;
 
 /**
 Dashboard Class.
-PHP version 5
 @category Dashboard_Class
 @package Histou
 @author Philip Griesbacher
@@ -31,8 +29,18 @@ class DashboardInfluxDB extends Dashboard
         parent::__construct($title);
     }
 
-    public function addAnnotation($name, $query, $title, $text, $tags, $iconColor = '#751975', $lineColor = '#751975', $datasource = INFLUXDB_DB, $enabled = SHOW_ANNOTATION, $iconSize = 13)
-    {
+    public function addAnnotation(
+        $name,
+        $query,
+        $title,
+        $text,
+        $tags,
+        $iconColor = '#751975',
+        $lineColor = '#751975',
+        $datasource = INFLUXDB_DB,
+        $enabled = SHOW_ANNOTATION,
+        $iconSize = 13
+    ) {
         array_push(
             $this->data['annotations']['list'],
             array(

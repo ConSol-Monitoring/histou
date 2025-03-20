@@ -1,7 +1,6 @@
 <?php
 /**
 This file is used for bootstrapping the env.
-PHP version 5
 @category bootstrap
 @package default
 @author Philip Griesbacher

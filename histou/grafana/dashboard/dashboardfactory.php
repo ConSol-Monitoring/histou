@@ -1,7 +1,6 @@
 <?php
 /**
 Contains a dashboard factory.
-PHP version 5
 @category Dashboard_Factory
 @package Histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\grafana\dashboard;
 
 /**
 dashboard factory.
-PHP version 5
 @category Dashboard_Factory
 @package Histou
 @author Philip Griesbacher

@@ -1,7 +1,6 @@
 <?php
 /**
 Contains Helper Class.
-PHP version 5
 @category Folder_Class
 @package histou
 @author Philip Griesbacher
@@ -12,7 +11,6 @@ namespace histou\helper;
 
 /**
 Helper Class.
-PHP version 5
 @category Helper_Class
 @package histou
 @author Philip Griesbacher
