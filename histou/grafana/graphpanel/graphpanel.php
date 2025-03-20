@@ -35,7 +35,7 @@ abstract class GraphPanel extends \histou\grafana\Panel
                 "custom" => array(
                     "lineInterpolation" => "linear",
                     "insertNulls" => false,
-                    "spanNulls" => true,
+                    "spanNulls" => 3600000, // do not connect outages more than 60 minutes
                 )
             ),
             "overrides" => array(

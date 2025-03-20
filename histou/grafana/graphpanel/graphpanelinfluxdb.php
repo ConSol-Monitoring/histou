@@ -41,7 +41,7 @@ class GraphPanelInfluxdb extends GraphPanel
                     'resultFormat' => 'time_series',
                     'datasource' => $datasource,
                     'groupBy' => array(array("params"=>array("\$__interval"), "type"=> "time"),
-                                       array("params"=>array("linear"), "type"=> "fill"))
+                                       array("params"=>array("null"), "type"=> "fill"))
                     ));
     }
 
