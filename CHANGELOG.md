@@ -1,4 +1,4 @@
-## next
+## v0.5.9 - 07.04.2025
 ### Change
 - add option to set minimum gaps length (spannulls)
 
