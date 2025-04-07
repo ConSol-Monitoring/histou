@@ -1,3 +1,7 @@
+## next
+### Change
+- add option to set minimum gaps length (spannulls)
+
 ## v0.5.8 - 20.03.2025
 ### Change
 - show gaps larger than 60m

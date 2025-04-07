@@ -31,6 +31,7 @@ class Basic
     public static $disablePanelTitle = false;
     public static $specificTemplate = '';
     public static $disablePerfdataLookup = false;
+    public static $spanNulls = 3600000; // do not connect outages more than 60 minutes
 
     /**
     Parses the GET parameter.
@@ -45,11 +46,11 @@ class Basic
 
         $shortopts  = "";
         $longopts  = array(
-        "host:",
-        "service:",
-        "command:",
-        "perf_label:",
-        "request:",
+            "host:",
+            "service:",
+            "command:",
+            "perf_label:",
+            "request:",
         );
         $args = getopt($shortopts, $longopts);
 
@@ -105,6 +106,11 @@ class Basic
 
         if (isset($_GET['height']) && !empty($_GET['height'])) {
             static::$height = $_GET["height"];
+        }
+
+        // override span null value (in seconds / defaults to 1h)
+        if (isset($_GET['spannulls']) && !empty($_GET['spannulls']) && is_numeric($_GET['spannulls'])) {
+            static::$spanNulls = $_GET["spannulls"] * 1000;
         }
 
         if (isset($_GET['legend']) && !empty($_GET['legend']) && $_GET["legend"] == "false") {

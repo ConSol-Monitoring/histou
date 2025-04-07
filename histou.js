@@ -18,7 +18,7 @@ return function (callback) {
     if(site && site.length > 1){
         url = site[1]+'/histou/';
     }
-    var configUrl = url+'index.php?host='+host+'&service='+service+'&height='+height+'&legend='+legend+debug+disablePanelTitle+disablePerfdataLookup+specificTemplate+'&annotations='+annotations;
+    var configUrl = url+'index.php?host='+host+'&service='+service+'&height='+height+'&legend='+legend+debug+disablePanelTitle+disablePerfdataLookup+specificTemplate+'&annotations='+annotations+spannulls;
 
     if(jQuery(".js-histou-flotAddons").length === 0) {
         $('head').append('<script class="js-histou-flotAddons" src="'+url+'flotAddons.js"></script>');
@@ -193,6 +193,12 @@ function parseArgs()
         specificTemplate = '';
     }else{
         specificTemplate = "&specificTemplate="+ARGS.specificTemplate;
+    }
+
+    if(_.isUndefined(ARGS.spannulls)) {
+        spannulls = '';
+    }else{
+        spannulls = "&spannulls="+ARGS.spannulls;
     }
 }
 
