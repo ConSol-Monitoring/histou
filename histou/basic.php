@@ -215,6 +215,11 @@ class Basic
             "influxdb"
         );
         Basic::setConstant(
+            "DATASOURCE_NAME",
+            strtolower(Basic::getConfigKey($config, 'general', 'datasourceName')),
+            "victoriametrics"
+        );
+        Basic::setConstant(
             "FORECAST_DATASOURCE_NAME",
             strtolower(Basic::getConfigKey($config, 'general', 'forecastDatasourceName')),
             "nagflux_forecast"
@@ -230,6 +235,8 @@ class Basic
 
         if (DATABASE_TYPE == INFLUXDB && preg_match(";db=(\\w*);", URL, $matches)) {
             define('INFLUXDB_DB', $matches[1]);
+        } elseif (DATABASE_TYPE == VICTORIAMETRICS && DATASOURCE_NAME !== 'victoriametrics') {
+            define('VICTORIAMETRICS_DS', DATASOURCE_NAME);
         } elseif (DATABASE_TYPE == VICTORIAMETRICS) {
             define('VICTORIAMETRICS_DS', 'victoriametrics');
         }

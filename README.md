@@ -37,6 +37,7 @@ Here are some of the important config-options:
 |general|tmpFolder|Set a folder path, if the default PHP Tmp folder does not suite you.|
 |general|specialChar|Can be used to create more specific regex within the rules. E.g. $host = '&host&' will be replaced with 'linux-server1' if the select hostname is linux-server1. This works likewise with host, service, command.|
 |general|databaseType|Choose between influxDB and victoriametrics. |
+|general|datasourceName|Choose different datasourcename for victoriametrics backend|
 |general|disablePanelTitle|If this is set to true the PanelTitels are hidden globaly, there is an URL Flag which does it just with the current page. It is usefull to get a bigger Graphpicture.|
 |folder|defaultTemplateFolder|This is the path to the folder containing the default templates|
 |folder|customTemplateFolder|This is the path to the folder containing the custom templates. The templates in this folder will override files in the default folder, if they have the same filename|

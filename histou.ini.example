@@ -6,6 +6,8 @@ tmpFolder = ""
 specialChar = "&"
 ; set the backend: influxdb, victoriametrics
 databaseType = "influxdb"
+; set a different datasourceName for victoriametrics backend
+; datasourceName = "myownds"
 forecastDatasourceName = "nagflux_forecast"
 ; disable the Panel Titel globally
 disablePanelTitle = false
