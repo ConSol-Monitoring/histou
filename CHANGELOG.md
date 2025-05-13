@@ -1,3 +1,7 @@
+## v0.6.0 - 13.05.2025
+### Change
+- add option to change datasource name for victoriametrics
+
 ## v0.5.9 - 07.04.2025
 ### Change
 - add option to set minimum gaps length (spannulls)
