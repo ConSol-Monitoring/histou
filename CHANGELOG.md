@@ -1,3 +1,9 @@
+## next
+### Change
+- remove deprecated escaping from template headers
+### Fixes
+- fix error in strtolower on php >= 8.2
+
 ## v0.6.0 - 13.05.2025
 ### Change
 - add option to change datasource name for victoriametrics
