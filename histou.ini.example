@@ -9,7 +9,7 @@ databaseType = "influxdb"
 ; set a different datasourceName for victoriametrics backend
 ; datasourceName = "myownds"
 forecastDatasourceName = "nagflux_forecast"
-; disable the Panel Titel globally
+; disable the panel titel globally
 disablePanelTitle = false
 
 [folder]
