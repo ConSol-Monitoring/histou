@@ -211,17 +211,17 @@ class Basic
         );
         Basic::setConstant(
             "DATABASE_TYPE",
-            strtolower(Basic::getConfigKey($config, 'general', 'databaseType') || ''),
+            strtolower(Basic::getConfigKey($config, 'general', 'databaseType', '')),
             "influxdb"
         );
         Basic::setConstant(
             "DATASOURCE_NAME",
-            strtolower(Basic::getConfigKey($config, 'general', 'datasourceName') || ''),
+            strtolower(Basic::getConfigKey($config, 'general', 'datasourceName', '')),
             "victoriametrics"
         );
         Basic::setConstant(
             "FORECAST_DATASOURCE_NAME",
-            strtolower(Basic::getConfigKey($config, 'general', 'forecastDatasourceName') || ''),
+            strtolower(Basic::getConfigKey($config, 'general', 'forecastDatasourceName', '')),
             "nagflux_forecast"
         );
 
@@ -289,12 +289,12 @@ class Basic
     @param string $key    config key.
     @return string or null.
     **/
-    private static function getConfigKey(array $config, $level, $key)
+    private static function getConfigKey(array $config, $level, $key, $fallback = null)
     {
         if (array_key_exists($level, $config) && array_key_exists($key, $config[$level])) {
             return $config[$level][$key];
         }
-        return null;
+        return $fallback;
     }
 
     /**
