@@ -44,7 +44,7 @@ class Parser
                     foreach (array('host', 'service', 'command', 'perfLabel') as $type) {
                         if (preg_match(";^\s*$type\s*=\s*(.*?)$;", $line, $hit)) {
                             if ($type == 'perfLabel') {
-                                $ruleHits[$type] = str_getcsv($hit[1]);
+                                $ruleHits[$type] = str_getcsv($hit[1],",", '"', '');
                                 foreach ($ruleHits[$type] as &$label) {
                                     $label = trim($label);
                                 }
