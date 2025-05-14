@@ -21,7 +21,7 @@ class Parser
 {
 
     /**
-    Expects a filename and parses the file, to return a rule and a dashbord lambda.
+    Expects a filename and parses the file, to return a rule and a dashboard lambda.
     @param string $file Path to file.
     @return array.
     **/
@@ -83,7 +83,7 @@ class Parser
                 foreach ($jsonDashboard['rows'] as &$row) {
                     if (array_key_exists('panels', $row)) {
                         foreach ($row['panels'] as &$panel) {
-                            // remove PanelTitel if needed
+                            // remove panel title if needed
                             if (\histou\Basic::$disablePanelTitle) {
                                 $panel['title'] = '';
                             }

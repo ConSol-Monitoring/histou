@@ -8,7 +8,6 @@ class ParserTest extends \MyPHPUnitFrameworkTestCase
     {
         define('DEFAULT_TEMPLATE_FOLDER', join(DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'histou_test', 'default')));
         define('HEIGHT', '200px');
-        define('INFLUX_FIELDSEPERATOR', '&');
         if (!file_exists(DEFAULT_TEMPLATE_FOLDER)) {
             mkdir(DEFAULT_TEMPLATE_FOLDER, 0777, true);
         }
