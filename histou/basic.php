@@ -26,7 +26,7 @@ class Basic
     public static $descriptorSpec = array(
         0 => array("pipe", "r"),    // STDIN
         1 => array("pipe", "w"),    // STDOUT
-        2 => array("pipe", "w")     // STERR
+        2 => array("pipe", "w")     // STDERR
     );
     public static $disablePanelTitle = false;
     public static $specificTemplate = '';
@@ -137,7 +137,7 @@ class Basic
     /**
     This function will print its input and exit with the given returncode.
     @param object $data       This object will be converted to json.
-    @param int    $returnCode The returncode the programm will exit.
+    @param int    $returnCode The returncode the program will exit.
     @return null.
     **/
     public static function returnData($data, $returnCode = 0)
@@ -298,7 +298,7 @@ class Basic
     }
 
     /**
-    Creates constatans with $value if it is empty the $alternative is taken.
+    Creates constant with $value if it is empty the $alternative is taken.
     @param string $NAME        Name of the constant.
     @param object $value       Value of the constant.
     @param object $alternative Alternative value of the constant.
