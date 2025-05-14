@@ -4,8 +4,6 @@ on:
   pull_request:
 jobs:
   test:
-    strategy:
-      fail-fast: false
     runs-on: ubuntu-latest
     steps:
     - run: sudo apt-get -y update
