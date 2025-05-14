@@ -1,4 +1,4 @@
-## next
+## v0.6.1 - 14.05.2025
 ### Change
 - remove deprecated escaping from template headers
 ### Fixes
