@@ -56,7 +56,7 @@ $genTemplate = function ($perfData) {
         };
         return ($index($firstLabel) < $index($secondLabel)) ? -1 : 1;
     });
-    $row = new \histou\grafana\Row($perfData['service'].' '.$perfData['command']);
+    $row = new \histou\grafana\Row($perfData['service']);
     $numberPanels = 0;
     foreach ($types as $type) {
         $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($perfData['service']." $templateVariableString ". $type);
@@ -74,8 +74,8 @@ $genTemplate = function ($perfData) {
         }
         foreach (array('in', 'out') as $direction) {
             $perfLabel = $templateVariableString."_".$type.'_'.$direction;
-            $target = $panel->genTarget($perfData['host'], $perfData['service'], $perfData['command'], $perfLabel, null, null, null, $customSelect, $perfData);
-            $panel->addTarget($panel->genDowntimeTarget($perfData['host'], $perfData['service'], $perfData['command'], $perfLabel));
+            $target = $panel->genTarget($perfData['host'], $perfData['service'], null, $perfLabel, null, null, null, $customSelect, $perfData);
+            $panel->addTarget($panel->genDowntimeTarget($perfData['host'], $perfData['service'], null, $perfLabel));
             if ($type != 'traffic') {
                 $target = $panel->addWarnToTarget($target, $perfLabel, false);
                 $target = $panel->addCritToTarget($target, $perfLabel, false);
@@ -93,7 +93,7 @@ $genTemplate = function ($perfData) {
         if ($numberPanels != 0 && $numberPanels % 2 == 0) {
             $row->setCustomProperty("repeat", $templateName);
             $dashboard->addRow($row);
-            $row = new \histou\grafana\Row($perfData['service'].' '.$perfData['command']);
+            $row = new \histou\grafana\Row($perfData['service']);
         }
         $row->addPanel($panel);
         $numberPanels++;
