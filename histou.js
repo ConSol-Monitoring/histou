@@ -119,8 +119,11 @@ function parseArgs()
     if (!_.isUndefined(ARGS.reduce)) {
         $('head').append('<style>.panel-fullscreen {top:0}</style>');
 
-        //change ui to our needs
-        clearUi();
+        // adjust ui to our needs
+        clearUi(true);
+    } else {
+        // adjust ui to our needs a little bit
+        clearUi(false);
     }
 
     if (!_.isUndefined(ARGS.dynUnit)) {
@@ -202,38 +205,51 @@ function parseArgs()
     }
 }
 
-function clearUi()
-{
+function clearUi(full) {
+    var maxWait = Date.now() + 5000;
     //removes white space
-    var checkExist = setInterval(
-        function () {
-            if ($('.panel-content').length) {
-                clearInterval(checkExist);
-                document.getElementsByClassName("panel-content")[0].style.paddingBottom = '0px';
-            }
-        },
-        100
-    );
-    /*
-        .panel-header removes the headline of the graphs
-        .navbar-static-top removes the menubar on the top
-        .row-control-inner removes the row controll button on the left
-        .span12 removes the add new row button on the bottom
-    */
-    var divs = ['.panel-header','.navbar-static-top','.row-control-inner','.span12']
-    for (var index = 0; index < divs.length; index++) {
-        waitForDivAndDeleteIt(divs[index]);
-    }
-    function waitForDivAndDeleteIt(div)
-    {
-        var checkExist = setInterval(
+    if(full) {
+        var checkExistInterval = setInterval(
             function () {
-                if ($(div).length) {
-                    clearInterval(checkExist);
-                    $(div).remove();
+                if($('.panel-content').length) {
+                    clearInterval(checkExistInterval);
+                    document.getElementsByClassName("panel-content")[0].style.paddingBottom = '0px';
+                }
+                if(Date.now() >= maxWait) {
+                    clearInterval(checkExistInterval);
                 }
             },
-            100
+            50
+        );
+    }
+
+    var selectors = [
+        '.show-on-hover',                         // removes elements that are only visible on hover
+        'DIV:has(> SPAN:contains("Powered by"))', // removes useless label
+    ];
+    if(full) {
+        selectors.push(
+            '.panel-header',        // removes the headline of the graphs
+            '.navbar-static-top',   // removes the menubar on the top
+            '.row-control-inner',   // removes the row controll button on the left
+            '.span12',              // removes the add new row button on the bottom
+        );
+    }
+    for(var index = 0; index < selectors.length; index++) {
+        waitForSelectorAndDeleteIt(selectors[index]);
+    }
+    function waitForSelectorAndDeleteIt(selector) {
+        var checkExistInterval = setInterval(
+            function () {
+                if($(selector).length) {
+                    clearInterval(checkExistInterval);
+                    $(selector).remove();
+                }
+                if(Date.now() >= maxWait) {
+                    clearInterval(checkExistInterval);
+                }
+            },
+            50
         );
     }
 }
