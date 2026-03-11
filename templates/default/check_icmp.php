@@ -21,7 +21,7 @@ $genTemplate = function ($perfData) {
 
     $row = new \histou\grafana\Row($perfData['host'].' '.$perfData['service'].' '.$perfData['command']);
     $panelTitle = $perfData['host'].' - '.$perfData['service'].' - rta';
-    if($perfData['service'] == "hostcheck") {
+    if ($perfData['service'] == "hostcheck") {
         $panelTitle = $perfData['host'].' - rta';
     }
     $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($panelTitle);
@@ -44,7 +44,7 @@ $genTemplate = function ($perfData) {
     $dashboard->addRow($row);
     $row = new \histou\grafana\Row($perfData['host'].' '.$perfData['service'].' '.$perfData['command']);
     $panelTitle = $perfData['host'].' - '.$perfData['service'].' - pl';
-    if($perfData['service'] == "hostcheck") {
+    if ($perfData['service'] == "hostcheck") {
         $panelTitle = $perfData['host'].' - pl';
     }
     $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($panelTitle);
