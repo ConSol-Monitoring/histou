@@ -20,7 +20,11 @@ $genTemplate = function ($perfData) {
     $dashboard = \histou\grafana\dashboard\DashboardFactory::generateDashboard($perfData['host'].'-'.$perfData['service']);
 
     $row = new \histou\grafana\Row($perfData['host'].' '.$perfData['service'].' '.$perfData['command']);
-    $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($perfData['host'].' '.$perfData['service'].' '.$perfData['command'].' rta');
+    $panelTitle = $perfData['host'].' - '.$perfData['service'].' - rta';
+    if($perfData['service'] == "hostcheck") {
+        $panelTitle = $perfData['host'].' - rta';
+    }
+    $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($panelTitle);
     $i = 0;
     foreach (array('rta', 'rtmin', 'rtmax') as $type) {
         $target = $panel->genTargetSimple($perfData['host'], $perfData['service'], $perfData['command'], $type, $colors[$i]);
@@ -39,7 +43,11 @@ $genTemplate = function ($perfData) {
     $row->addPanel($panel);
     $dashboard->addRow($row);
     $row = new \histou\grafana\Row($perfData['host'].' '.$perfData['service'].' '.$perfData['command']);
-    $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($perfData['host'].' '.$perfData['service'].' '.$perfData['command'].' pl');
+    $panelTitle = $perfData['host'].' - '.$perfData['service'].' - pl';
+    if($perfData['service'] == "hostcheck") {
+        $panelTitle = $perfData['host'].' - pl';
+    }
+    $panel = \histou\grafana\graphpanel\GraphPanelFactory::generatePanel($panelTitle);
     $target = $panel->genTargetSimple($perfData['host'], $perfData['service'], $perfData['command'], 'pl');
     $target = $panel->addWarnToTarget($target, $type);
     $target = $panel->addCritToTarget($target, $type);
