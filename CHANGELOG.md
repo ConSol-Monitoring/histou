@@ -1,3 +1,9 @@
+## v0.6.2 - 16.03.2026
+### Change
+- adjust default panel title
+### Fixes
+- fix endless retries on page load
+
 ## v0.6.1 - 14.05.2025
 ### Change
 - remove deprecated escaping from template headers
