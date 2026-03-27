@@ -59,6 +59,9 @@ class GraphPanelVictoriametrics extends GraphPanel
         if ($alias == '') {
             $alias = $performanceLabel;
         }
+
+        $performanceLabel = addslashes($performanceLabel);
+
         if ($useRegex) {
             $target = $this->createTarget(array(
                                             'host' => array('value' => "^".$host."$", 'operator' => '=~'),
@@ -137,6 +140,9 @@ class GraphPanelVictoriametrics extends GraphPanel
         if ($alias == '') {
             $alias = 'downtime';
         }
+
+        $performanceLabel = addslashes($performanceLabel);
+
         if ($useRegex) {
             $target = $this->createTarget(
                 array(
