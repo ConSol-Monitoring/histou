@@ -34,7 +34,7 @@ class GraphPanelVictoriametricsTarget extends \ArrayObject implements \JsonSeria
 
     private function getExpr()
     {
-        $expr =  'last_over_time({__name__=~"' . $this['measurement'] . "_(" . $this->getSelect() . ')",' . $this->getFilter() . '}[15m])';
+        $expr =  'last_over_time({__name__=~"' . $this['measurement'] . "_(" . $this->getSelect() . ')",' . $this->getFilter() . '})';
         return 'label_replace(' . $expr . ', "__tmp_alias", "$1", "__name__", "metrics_(.*)")';
     }
 
